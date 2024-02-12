@@ -1,0 +1,793 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>AES.cpp</itemPath>
+      <itemPath>AES.hpp</itemPath>
+      <itemPath>AVLTree.cpp</itemPath>
+      <itemPath>AVLTree.h</itemPath>
+      <itemPath>Amortized3.cpp</itemPath>
+      <itemPath>Amortized3.h</itemPath>
+      <itemPath>AmortizedBASClient.cpp</itemPath>
+      <itemPath>AmortizedBASClient.h</itemPath>
+      <itemPath>AmortizedBASServer.cpp</itemPath>
+      <itemPath>AmortizedBASServer.h</itemPath>
+      <itemPath>AmortizedNlogN.cpp</itemPath>
+      <itemPath>AmortizedNlogN.h</itemPath>
+      <itemPath>AmortizedOneChoice.cpp</itemPath>
+      <itemPath>AmortizedOneChoice.h</itemPath>
+      <itemPath>AmortizedPiBAS.cpp</itemPath>
+      <itemPath>AmortizedPiBAS.h</itemPath>
+      <itemPath>AmortizedTwoChoice.cpp</itemPath>
+      <itemPath>AmortizedTwoChoice.h</itemPath>
+      <itemPath>Bid.cpp</itemPath>
+      <itemPath>Bid.h</itemPath>
+      <itemPath>DeAmortizedBASClient.cpp</itemPath>
+      <itemPath>DeAmortizedBASClient.h</itemPath>
+      <itemPath>DeAmortizedBASServer.cpp</itemPath>
+      <itemPath>DeAmortizedBASServer.h</itemPath>
+      <itemPath>DeAmortizedSDdBAS.cpp</itemPath>
+      <itemPath>DeAmortizedSDdBAS.h</itemPath>
+      <itemPath>DeAmortizedSDdGeneral.cpp</itemPath>
+      <itemPath>DeAmortizedSDdGeneral.h</itemPath>
+      <itemPath>DeAmortizedSDdNlogN.cpp</itemPath>
+      <itemPath>DeAmortizedSDdNlogN.h</itemPath>
+      <itemPath>DeAmortizedSDdPlaintext.cpp</itemPath>
+      <itemPath>DeAmortizedSDdPlaintext.h</itemPath>
+      <itemPath>NlogNClient.cpp</itemPath>
+      <itemPath>NlogNClient.h</itemPath>
+      <itemPath>NlogNSDdGeneralClient.cpp</itemPath>
+      <itemPath>NlogNSDdGeneralClient.h</itemPath>
+      <itemPath>NlogNServer.cpp</itemPath>
+      <itemPath>NlogNServer.h</itemPath>
+      <itemPath>NlogNStorage.cpp</itemPath>
+      <itemPath>NlogNStorage.h</itemPath>
+      <itemPath>NlogNWithOptimalLocalityClient.cpp</itemPath>
+      <itemPath>NlogNWithOptimalLocalityClient.h</itemPath>
+      <itemPath>NlogNWithOptimalLocalityServer.cpp</itemPath>
+      <itemPath>NlogNWithOptimalLocalityServer.h</itemPath>
+      <itemPath>NlogNWithOptimalLocalityStorage.cpp</itemPath>
+      <itemPath>NlogNWithOptimalLocalityStorage.h</itemPath>
+      <itemPath>NlogNWithTunableLocalityClient.cpp</itemPath>
+      <itemPath>NlogNWithTunableLocalityClient.h</itemPath>
+      <itemPath>NlogNWithTunableLocalityServer.cpp</itemPath>
+      <itemPath>NlogNWithTunableLocalityServer.h</itemPath>
+      <itemPath>NlogNWithTunableLocalityStorage.cpp</itemPath>
+      <itemPath>NlogNWithTunableLocalityStorage.h</itemPath>
+      <itemPath>OMAP.cpp</itemPath>
+      <itemPath>OMAP.h</itemPath>
+      <itemPath>ORAM.cpp</itemPath>
+      <itemPath>ORAM.hpp</itemPath>
+      <itemPath>OneChoiceClient.cpp</itemPath>
+      <itemPath>OneChoiceClient.h</itemPath>
+      <itemPath>OneChoiceSDdGeneralClient.cpp</itemPath>
+      <itemPath>OneChoiceSDdGeneralClient.h</itemPath>
+      <itemPath>OneChoiceSDdGeneralServer.cpp</itemPath>
+      <itemPath>OneChoiceSDdGeneralServer.h</itemPath>
+      <itemPath>OneChoiceSDdNoOMAPClient.cpp</itemPath>
+      <itemPath>OneChoiceSDdNoOMAPClient.h</itemPath>
+      <itemPath>OneChoiceSDdNoOMAPServer.cpp</itemPath>
+      <itemPath>OneChoiceSDdNoOMAPServer.h</itemPath>
+      <itemPath>OneChoiceSDdNoOMAPStorage.cpp</itemPath>
+      <itemPath>OneChoiceSDdNoOMAPStorage.h</itemPath>
+      <itemPath>OneChoiceSDdOMAPClient.cpp</itemPath>
+      <itemPath>OneChoiceSDdOMAPClient.h</itemPath>
+      <itemPath>OneChoiceSDdOMAPServer.cpp</itemPath>
+      <itemPath>OneChoiceSDdOMAPServer.h</itemPath>
+      <itemPath>OneChoiceSDdOMAPStorage.cpp</itemPath>
+      <itemPath>OneChoiceSDdOMAPStorage.h</itemPath>
+      <itemPath>OneChoiceServer.cpp</itemPath>
+      <itemPath>OneChoiceServer.h</itemPath>
+      <itemPath>OneChoiceStorage.cpp</itemPath>
+      <itemPath>OneChoiceStorage.h</itemPath>
+      <itemPath>RAMStore.cpp</itemPath>
+      <itemPath>RAMStore.hpp</itemPath>
+      <itemPath>README.md</itemPath>
+      <itemPath>Server.cpp</itemPath>
+      <itemPath>Server.h</itemPath>
+      <itemPath>Storage.cpp</itemPath>
+      <itemPath>Storage.h</itemPath>
+      <itemPath>StorageSDDPiBAS.cpp</itemPath>
+      <itemPath>StorageSDDPiBAS.h</itemPath>
+      <itemPath>StorageSDd.cpp</itemPath>
+      <itemPath>StorageSDd.h</itemPath>
+      <itemPath>TransientStorage.cpp</itemPath>
+      <itemPath>TransientStorage.h</itemPath>
+      <itemPath>TransientStorage2D.cpp</itemPath>
+      <itemPath>TransientStorage2D.h</itemPath>
+      <itemPath>TwoChoicePPWithTunableLocalityClient.cpp</itemPath>
+      <itemPath>TwoChoicePPWithTunableLocalityClient.h</itemPath>
+      <itemPath>TwoChoicePPWithTunableLocalityServer.cpp</itemPath>
+      <itemPath>TwoChoicePPWithTunableLocalityServer.h</itemPath>
+      <itemPath>TwoChoicePPWithTunableLocalityStorage.cpp</itemPath>
+      <itemPath>TwoChoicePPWithTunableLocalityStorage.h</itemPath>
+      <itemPath>TwoChoicePPwithStashClient.cpp</itemPath>
+      <itemPath>TwoChoicePPwithStashClient.h</itemPath>
+      <itemPath>TwoChoicePPwithStashServer.cpp</itemPath>
+      <itemPath>TwoChoicePPwithStashServer.h</itemPath>
+      <itemPath>TwoChoicePPwithStashStorage.cpp</itemPath>
+      <itemPath>TwoChoicePPwithStashStorage.h</itemPath>
+      <itemPath>TwoChoiceWithOneChoiceClient.cpp</itemPath>
+      <itemPath>TwoChoiceWithOneChoiceClient.h</itemPath>
+      <itemPath>TwoChoiceWithOneChoiceServer.cpp</itemPath>
+      <itemPath>TwoChoiceWithOneChoiceServer.h</itemPath>
+      <itemPath>TwoChoiceWithOneChoiceStorage.cpp</itemPath>
+      <itemPath>TwoChoiceWithOneChoiceStorage.h</itemPath>
+      <itemPath>TwoChoiceWithTunableLocalityClient.cpp</itemPath>
+      <itemPath>TwoChoiceWithTunableLocalityClient.h</itemPath>
+      <itemPath>TwoChoiceWithTunableLocalityServer.cpp</itemPath>
+      <itemPath>TwoChoiceWithTunableLocalityServer.h</itemPath>
+      <itemPath>TwoChoiceWithTunableLocalityStorage.cpp</itemPath>
+      <itemPath>TwoChoiceWithTunableLocalityStorage.h</itemPath>
+      <itemPath>Types.hpp</itemPath>
+      <itemPath>Utilities.cpp</itemPath>
+      <itemPath>Utilities.h</itemPath>
+      <itemPath>config.txt</itemPath>
+      <itemPath>logger.cpp</itemPath>
+      <itemPath>logger.hpp</itemPath>
+      <itemPath>main.cpp</itemPath>
+      <itemPath>utils.cpp</itemPath>
+      <itemPath>utils.hpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <ccTool>
+          <standard>11</standard>
+          <incDir>
+            <pElem>/usr/include/openssl</pElem>
+          </incDir>
+          <commandLine>-mssse3 -msse2 -msse -march=native -maes -fprefetch-loop-arrays</commandLine>
+        </ccTool>
+        <linkerTool>
+          <commandlineTool>g++</commandlineTool>
+          <linkerLibItems>
+            <linkerOptionItem>-lcrypto</linkerOptionItem>
+            <linkerOptionItem>-lssl</linkerOptionItem>
+            <linkerLibLibItem>stxxl_debug</linkerLibLibItem>
+          </linkerLibItems>
+          <commandLine>-lpthread -lcrypto -lssl</commandLine>
+        </linkerTool>
+      </compileType>
+      <item path="AES.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AES.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="AVLTree.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AVLTree.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Amortized3.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Amortized3.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="AmortizedBASClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AmortizedBASClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="AmortizedBASServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AmortizedBASServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="AmortizedNlogN.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AmortizedNlogN.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="AmortizedOneChoice.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AmortizedOneChoice.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="AmortizedPiBAS.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AmortizedPiBAS.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="AmortizedTwoChoice.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AmortizedTwoChoice.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Bid.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Bid.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DeAmortizedBASClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DeAmortizedBASClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DeAmortizedBASServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DeAmortizedBASServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DeAmortizedSDdBAS.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DeAmortizedSDdBAS.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DeAmortizedSDdGeneral.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DeAmortizedSDdGeneral.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DeAmortizedSDdNlogN.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DeAmortizedSDdNlogN.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DeAmortizedSDdPlaintext.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DeAmortizedSDdPlaintext.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NlogNClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="NlogNClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NlogNSDdGeneralClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="NlogNSDdGeneralClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NlogNServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="NlogNServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NlogNStorage.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="NlogNStorage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NlogNWithOptimalLocalityClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="NlogNWithOptimalLocalityClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NlogNWithOptimalLocalityServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="NlogNWithOptimalLocalityServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NlogNWithOptimalLocalityStorage.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="NlogNWithOptimalLocalityStorage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NlogNWithTunableLocalityClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="NlogNWithTunableLocalityClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NlogNWithTunableLocalityServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="NlogNWithTunableLocalityServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NlogNWithTunableLocalityStorage.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="NlogNWithTunableLocalityStorage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OMAP.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OMAP.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ORAM.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ORAM.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OneChoiceClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OneChoiceClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdGeneralClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdGeneralClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdGeneralServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdGeneralServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdNoOMAPClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdNoOMAPClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdNoOMAPServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdNoOMAPServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdNoOMAPStorage.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdNoOMAPStorage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdOMAPClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdOMAPClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdOMAPServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdOMAPServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdOMAPStorage.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdOMAPStorage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OneChoiceServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OneChoiceServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OneChoiceStorage.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OneChoiceStorage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RAMStore.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="RAMStore.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="README.md" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Server.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Server.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Storage.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Storage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="StorageSDDPiBAS.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="StorageSDDPiBAS.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="StorageSDd.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="StorageSDd.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TransientStorage.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TransientStorage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TransientStorage2D.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TransientStorage2D.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TwoChoicePPWithTunableLocalityClient.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="TwoChoicePPWithTunableLocalityClient.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="TwoChoicePPWithTunableLocalityServer.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="TwoChoicePPWithTunableLocalityServer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="TwoChoicePPWithTunableLocalityStorage.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="TwoChoicePPWithTunableLocalityStorage.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="TwoChoicePPwithStashClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TwoChoicePPwithStashClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TwoChoicePPwithStashServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TwoChoicePPwithStashServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TwoChoicePPwithStashStorage.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TwoChoicePPwithStashStorage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TwoChoiceWithOneChoiceClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TwoChoiceWithOneChoiceClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TwoChoiceWithOneChoiceServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TwoChoiceWithOneChoiceServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TwoChoiceWithOneChoiceStorage.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TwoChoiceWithOneChoiceStorage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TwoChoiceWithTunableLocalityClient.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="TwoChoiceWithTunableLocalityClient.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="TwoChoiceWithTunableLocalityServer.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="TwoChoiceWithTunableLocalityServer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="TwoChoiceWithTunableLocalityStorage.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="TwoChoiceWithTunableLocalityStorage.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="Types.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Utilities.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Utilities.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="config.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="logger.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="logger.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="utils.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="utils.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+          <standard>11</standard>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+      <item path="AES.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AES.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="AVLTree.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AVLTree.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Amortized3.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Amortized3.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="AmortizedBASClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AmortizedBASClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="AmortizedBASServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AmortizedBASServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="AmortizedNlogN.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AmortizedNlogN.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="AmortizedOneChoice.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AmortizedOneChoice.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="AmortizedPiBAS.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AmortizedPiBAS.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="AmortizedTwoChoice.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AmortizedTwoChoice.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Bid.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Bid.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DeAmortizedBASClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DeAmortizedBASClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DeAmortizedBASServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DeAmortizedBASServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DeAmortizedSDdBAS.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DeAmortizedSDdBAS.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DeAmortizedSDdGeneral.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DeAmortizedSDdGeneral.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DeAmortizedSDdNlogN.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DeAmortizedSDdNlogN.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DeAmortizedSDdPlaintext.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DeAmortizedSDdPlaintext.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NlogNClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="NlogNClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NlogNSDdGeneralClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="NlogNSDdGeneralClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NlogNServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="NlogNServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NlogNStorage.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="NlogNStorage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NlogNWithOptimalLocalityClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="NlogNWithOptimalLocalityClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NlogNWithOptimalLocalityServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="NlogNWithOptimalLocalityServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NlogNWithOptimalLocalityStorage.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="NlogNWithOptimalLocalityStorage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NlogNWithTunableLocalityClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="NlogNWithTunableLocalityClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NlogNWithTunableLocalityServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="NlogNWithTunableLocalityServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NlogNWithTunableLocalityStorage.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="NlogNWithTunableLocalityStorage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OMAP.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OMAP.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ORAM.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ORAM.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OneChoiceClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OneChoiceClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdGeneralClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdGeneralClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdGeneralServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdGeneralServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdNoOMAPClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdNoOMAPClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdNoOMAPServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdNoOMAPServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdNoOMAPStorage.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdNoOMAPStorage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdOMAPClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdOMAPClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdOMAPServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdOMAPServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdOMAPStorage.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OneChoiceSDdOMAPStorage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OneChoiceServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OneChoiceServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="OneChoiceStorage.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="OneChoiceStorage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RAMStore.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="RAMStore.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="README.md" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Server.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Server.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Storage.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Storage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="StorageSDDPiBAS.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="StorageSDDPiBAS.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="StorageSDd.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="StorageSDd.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TransientStorage.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TransientStorage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TransientStorage2D.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TransientStorage2D.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TwoChoicePPWithTunableLocalityClient.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="TwoChoicePPWithTunableLocalityClient.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="TwoChoicePPWithTunableLocalityServer.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="TwoChoicePPWithTunableLocalityServer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="TwoChoicePPWithTunableLocalityStorage.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="TwoChoicePPWithTunableLocalityStorage.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="TwoChoicePPwithStashClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TwoChoicePPwithStashClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TwoChoicePPwithStashServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TwoChoicePPwithStashServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TwoChoicePPwithStashStorage.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TwoChoicePPwithStashStorage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TwoChoiceWithOneChoiceClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TwoChoiceWithOneChoiceClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TwoChoiceWithOneChoiceServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TwoChoiceWithOneChoiceServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TwoChoiceWithOneChoiceStorage.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TwoChoiceWithOneChoiceStorage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TwoChoiceWithTunableLocalityClient.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="TwoChoiceWithTunableLocalityClient.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="TwoChoiceWithTunableLocalityServer.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="TwoChoiceWithTunableLocalityServer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="TwoChoiceWithTunableLocalityStorage.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="TwoChoiceWithTunableLocalityStorage.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="Types.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Utilities.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Utilities.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="config.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="logger.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="logger.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="utils.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="utils.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
