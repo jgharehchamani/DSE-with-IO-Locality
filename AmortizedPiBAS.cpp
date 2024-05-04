@@ -6,7 +6,7 @@
 
 using namespace std;
 
-AmortizedPiBAS::AmortizedPiBAS(int N, bool inMemory, bool overwrite) {
+AmortizedPiBAS::AmortizedPiBAS(int N, bool inMemory, bool overwrite): DSEScheme() {
     cout << "AmortizedPiBAS" << endl;
     long levels = floor(log2(N)) + 1;
     L = new AmortizedBASClient(levels, inMemory, overwrite, profile);
@@ -140,8 +140,7 @@ void AmortizedPiBAS::update(OP op, string keyword, int ind, bool setup) {
 
     if (!setup) {
         auto updateTime = Utilities::stopTimer(33);
-        cout << "Total drop cache command time for Storage:[" << L->server->storage->cacheTime << "]" << endl;
-        cout << "Update time - cache drop time =[" << updateTime - L->server->storage->cacheTime << "]" << endl;
+        totalUpdateTime = updateTime - L->server->storage->cacheTime;
     }
 }
 
@@ -185,13 +184,13 @@ vector<int> AmortizedPiBAS::search(string keyword) {
         }
     }
     filterationTime = Utilities::stopTimer(99);
-    cout << endl << endl << "TOTAL search BYTES read:{" << L->totalCommunication << "}" << endl;
-    cout << "TOTAL search TIME:[[" << L->searchTime << "]]" << endl;
-    printf("filteration time:%f\n", filterationTime);
+//    cout << endl << endl << "TOTAL search BYTES read:{" << L->totalCommunication << "}" << endl;
+//    cout << "TOTAL search TIME:[[" << L->searchTime << "]]" << endl;
+//    printf("filteration time:%f\n", filterationTime);
 
-    cout << "Total AmortizedPiBAS Search time:" << searchTime << "/" << L->searchTime << endl;
-    cout << "Total drop cache command time for Storage:[" << L->TotalCacheTime << "]" << endl;
-    cout << "Amort search time - cache drop time =[" << searchTime + filterationTime - L->TotalCacheTime << "]" << endl;
+//    cout << "Total AmortizedPiBAS Search time:" << searchTime << "/" << L->searchTime << endl;
+//    cout << "Total drop cache command time for Storage:[" << L->TotalCacheTime << "]" << endl;
+    totalSearchTime = searchTime + filterationTime - L->TotalCacheTime;
     //    cout << "Correct Time:" << searchTime + filterationTime - L->TotalCacheTime << endl;
     //totalSearchCommSize += L->totalCommunication;
     //cout <<"-----------------------------------------------------------"<<endl;
@@ -231,7 +230,7 @@ void AmortizedPiBAS::endSetup() {
     if (setup) {
         for (int i = 0; i < tmpLocalSize; i++) {
             if (setupData[i].size() > 0) {
-                cout << "END SETUP:" << i << endl;
+//                cout << "END SETUP:" << i << endl;
                 unsigned char* newKey = new unsigned char[AES_KEY_SIZE];
                 memset(newKey, 0, AES_KEY_SIZE);
                 L->setup2(i, setupData[i], newKey);

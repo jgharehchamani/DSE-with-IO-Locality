@@ -5,7 +5,6 @@ OneChoiceClient::~OneChoiceClient() {
 }
 
 OneChoiceClient::OneChoiceClient(long numOfDataSets, bool inMemory, bool overwrite, bool profile) {
-    cout << "==================Running Vanilla One-Choice==================" << endl;
     this->profile = profile;
     server = new OneChoiceServer(numOfDataSets, inMemory, overwrite, profile, "OneChoice-");
     for (long i = 0; i < numOfDataSets; i++) {
@@ -160,7 +159,6 @@ vector<prf_type> OneChoiceClient::search(long index, string keyword, unsigned ch
     prf_type token = Utilities::encode(keyword, key);
     long keywordCnt = server->getCounter(index, token);
     auto t = Utilities::stopTimer(10);
-    cout << "index:" << index << " getCounter:" << keywordCnt << " time:" << t << endl;
 
 
     //if(keywordCnt > 0)
@@ -170,7 +168,6 @@ vector<prf_type> OneChoiceClient::search(long index, string keyword, unsigned ch
         //vector<prf_type> ciphers = server->getAllData(index);
         totalCommunication += ciphers.size() * sizeof (prf_type);
         t = Utilities::stopTimer(20);
-        cout << keywordCnt << " one choice time:" << t << endl;
         long cnt = 0;
         if (profile) {
             searchPreparation = Utilities::stopTimer(65);
@@ -185,18 +182,17 @@ vector<prf_type> OneChoiceClient::search(long index, string keyword, unsigned ch
             }
         }
         if (profile) {
-            searchDecryption = Utilities::stopTimer(65);
-            printf("search decryption time:%f for decrypting:%d ciphers\n", searchDecryption, ciphers.size());
+            searchDecryption = Utilities::stopTimer(65);            
         }
         TotalCacheTime += server->storage->cacheTime;
         TotalCacheTime += server->keywordCounters->cacheTime;
     }
     auto aa = Utilities::stopTimer(77);
-    cout << "level time:" << aa << endl;
-    cout << "level cache time:" << server->storage->cacheTime + server->keywordCounters->cacheTime << endl;
-    cout << "level pure time:" << aa - (server->storage->cacheTime + server->keywordCounters->cacheTime) << endl;
+//    cout << "level time:" << aa << endl;
+//    cout << "level cache time:" << server->storage->cacheTime + server->keywordCounters->cacheTime << endl;
+//    cout << "level pure time:" << aa - (server->storage->cacheTime + server->keywordCounters->cacheTime) << endl;
     searchTime += Utilities::stopTimer(77);
-    cout << finalRes.size() << "/" << keywordCnt << endl;
+//    cout << finalRes.size() << "/" << keywordCnt << endl;
     return finalRes;
 }
 

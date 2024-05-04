@@ -8,7 +8,6 @@ TwoChoiceWithOneChoiceClient::~TwoChoiceWithOneChoiceClient() {
 }
 
 TwoChoiceWithOneChoiceClient::TwoChoiceWithOneChoiceClient(long numOfDataSets, bool inMemory, bool overwrite, bool profile) {
-    cout << "================= RUNNING SDa+TwoChoice+(One choice when bins overflow)(long) ==================" << endl;
     this->profile = profile;
     twoChoiceServer = new TwoChoiceWithOneChoiceServer(numOfDataSets, inMemory, overwrite, profile);
 
@@ -454,19 +453,13 @@ vector<prf_type> TwoChoiceWithOneChoiceClient::search(long index, string keyword
 
     long keywordCnt = twoChoiceServer->getCounter(index, token);
     auto t = Utilities::stopTimer(10);
-    cout << "index:" << index << " getCounter:" << keywordCnt << " time:" << t << endl;
-    cout << index << ": getCounter (TWO+ONE Choice) Time:[" << twoChoiceServer->keywordCounters->getCounterTime << "]" << endl;
     searchTime += twoChoiceServer->keywordCounters->getCounterTime;
 
     auto h = Utilities::stopTimer(77);
-    cout << "counter extraction:" << h << endl;
 
     int mpl = maxPossibleLen(index);
-    cout << index << ": Threshold :" << mpl << endl;
-    cout << index << ": keywordCount:" << keywordCnt << endl;
     vector<prf_type> ciphers;
     vector<prf_type> oneChoiceCiphers;
-    cout << "number of results:" << keywordCnt << " mpl:" << mpl << endl;
     if (keywordCnt <= mpl && keywordCnt > 0) {
         keywordCnt = pow(2, (long) ceil(log2(keywordCnt)));
         Utilities::startTimer(17);
@@ -493,13 +486,8 @@ vector<prf_type> TwoChoiceWithOneChoiceClient::search(long index, string keyword
             searchTime += prepareHT;
             ciphers = twoChoiceServer->search(index, hashtoken, keywordCnt, mpl);
             totalCommunication += ciphers.size() * sizeof (prf_type);
-            cout << index << ": s:" << s << " TWO Choice (with one) BYTES READ:{"
-                    << ciphers.size() * sizeof (prf_type) << "}" << endl;
             searchTime += twoChoiceServer->storage->searchTime;
             searchTime += twoChoiceServer->serverSearchTime;
-            cout << "twoChoiceServer->storage->searchTime:" << twoChoiceServer->storage->searchTime << " twoChoiceServer->serverSearchTime:" << twoChoiceServer->serverSearchTime << " prepareHT:" << prepareHT << endl;
-            cout << index << ":s:" << s << " TWO Choice search Time:[" << twoChoiceServer->storage->searchTime +
-                    twoChoiceServer->serverSearchTime + prepareHT << "]         <<===========" << endl;
             Utilities::startTimer(99);
             if (flag == 0) {
                 for (auto item : ciphers) {
@@ -512,24 +500,17 @@ vector<prf_type> TwoChoiceWithOneChoiceClient::search(long index, string keyword
                 }
             }
             if (s == 1 && hashtoken1.data() == hashtoken2.data()) {
-                cout << "BREAK" << endl << endl;
                 break;
             }
             auto decodeTime = Utilities::stopTimer(99);
-            cout << index << ": s:" << s << " TWO Choice(with one) cipher size:" << ciphers.size()
-                    << " DECODE+ Time:[" << decodeTime << "]" << endl;
             searchTime += decodeTime;
         }
         auto t9 = Utilities::stopTimer(17);
-        cout << "first part time:" << t9 << endl;
     } else if (keywordCnt > mpl) {
         Utilities::startTimer(17);
 
         oneChoiceCiphers = oneChoiceServer->search(index, token, keywordCnt);
         totalCommunication += oneChoiceCiphers.size() * sizeof (prf_type);
-        cout << index << ": ONE Choice (with two) BYTES READ:{" << oneChoiceCiphers.size() * sizeof (prf_type) << "}" << endl;
-        cout << index << ": ONE Choice (two with one) Time :[" << oneChoiceServer->storage->searchTime
-                + oneChoiceServer->serverSearchTime << "]      <----------" << endl;
         searchTime += oneChoiceServer->storage->searchTime;
         searchTime += oneChoiceServer->serverSearchTime;
         if (oneChoiceCiphers.size() > 0) {
@@ -542,21 +523,15 @@ vector<prf_type> TwoChoiceWithOneChoiceClient::search(long index, string keyword
                 }
             }
             auto decodeTime = Utilities::stopTimer(100);
-            cout << index << ": ONE choice(with two) DECODE Time:[" << decodeTime << "]" << endl;
             searchTime = searchTime + decodeTime;
         }
         auto t9 = Utilities::stopTimer(17);
-        cout << "second part time:" << t9 << endl;
         //cout<<"THIS TIME SEARCH TIME:"<<searchTime-previousSearchTime<<endl;
     }
     TotalCacheTime += oneChoiceServer->storage->cacheTime;
     TotalCacheTime += twoChoiceServer->keywordCounters->cacheTime;
     TotalCacheTime += twoChoiceServer->storage->cacheTime;
-    cout << endl;
     auto zz = Utilities::stopTimer(177);
-    cout << "level time:" << zz << endl;
-    cout << "level cache time:" << oneChoiceServer->storage->cacheTime + twoChoiceServer->keywordCounters->cacheTime + twoChoiceServer->storage->cacheTime << endl;
-    cout << "level pure time:" << zz - (oneChoiceServer->storage->cacheTime + twoChoiceServer->keywordCounters->cacheTime + twoChoiceServer->storage->cacheTime) << endl;
 
     return finalRes;
 }

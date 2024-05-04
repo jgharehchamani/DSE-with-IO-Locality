@@ -29,7 +29,7 @@ NlogNSDdGeneralClient::NlogNSDdGeneralClient(int N, bool inMemory, bool overwrit
         sizeOfEachBin.push_back(curSizeOfEachBin);
         int is = curNumberOfBins*curSizeOfEachBin;
         indexSize.push_back(is);
-        printf("Index:%d #of Bins:%d size of bin:%d is:%d\n", j, curNumberOfBins, curSizeOfEachBin, is);
+//        printf("Index:%d #of Bins:%d size of bin:%d is:%d\n", j, curNumberOfBins, curSizeOfEachBin, is);
     }
     exist.resize(3);
     setupFiles.resize(numOfIndices);
@@ -58,7 +58,7 @@ vector<prf_type> NlogNSDdGeneralClient::search(int index, int instance, string k
     Utilities::startTimer(131);
     long keywordCnt = server[instance]->getCounter(index, token);
     auto t3 = Utilities::stopTimer(131);
-    cout << "index:" << index << " getCounter=" << keywordCnt << " time taken (for NlogN):" << t3 << endl;
+//    cout << "index:" << index << " getCounter=" << keywordCnt << " time taken (for NlogN):" << t3 << endl;
     server[instance]->keywordCounters->getCounterTime = t3;
     vector<prf_type> finalRes;
     long attempt = 0;
@@ -72,7 +72,7 @@ vector<prf_type> NlogNSDdGeneralClient::search(int index, int instance, string k
                 break;
             }
             ciphers = server[instance]->search(index, innerinstance, pos);
-            cout << "index:" << index << " instance:" << instance << " size:" << ciphers.size() << endl;
+//            cout << "index:" << index << " instance:" << instance << " size:" << ciphers.size() << endl;
             for (auto item : ciphers) {
                 prf_type plaintext;
                 Utilities::decode(item, plaintext, key);
@@ -90,9 +90,9 @@ vector<prf_type> NlogNSDdGeneralClient::search(int index, int instance, string k
     }
     TotalCacheTime += cachet;
     auto aa = Utilities::stopTimer(77);
-    cout << "level time:" << aa << endl;
-    cout << "level cache time:" << cachet << endl;
-    cout << "level pure time:" << aa - cachet << endl;
+//    cout << "level time:" << aa << endl;
+//    cout << "level cache time:" << cachet << endl;
+//    cout << "level pure time:" << aa - cachet << endl;
     searchTime += aa;
     //    cout << finalRes.size() << "/" << keywordCount << endl;
     return finalRes;
@@ -234,8 +234,8 @@ int NlogNSDdGeneralClient::getCorrespondingLevel(int index, int size) {
     int maxCapacity = pow(2, index);
     int innerLevels = index + 1;
     int storeLevel = floor(log2(size));
-    int res = storeLevel - (storeLevel % JUMP_SIZE);
-    int maxLevelIndex = JUMP_SIZE * (MAX_LEVEL - 1);
+    int res = storeLevel - (storeLevel % Utilities::JUMP_SIZE);
+    int maxLevelIndex = Utilities::JUMP_SIZE * (MAX_LEVEL - 1);
     if (res > maxLevelIndex) {
         return maxLevelIndex;
     }

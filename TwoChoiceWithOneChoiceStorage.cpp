@@ -12,17 +12,17 @@ TwoChoiceWithOneChoiceStorage::TwoChoiceWithOneChoiceStorage(bool inMemory, long
         long curNumberOfBins = i > 3 ? ((long) ceil((float) pow(2, i) / ((log2(log2(pow(2, i))))*(log2(log2(log2(pow(2, i)))))*(log2(log2(log2(pow(2, i)))))))) : 1;
         curNumberOfBins = pow(2, (long) ceil(log2(curNumberOfBins)));
         long curSizeOfEachBin = i > 3 ? SPACE_OVERHEAD * (log2(log2(pow(2, i))))*(log2(log2(log2(pow(2, i)))))*(log2(log2(log2(pow(2, i))))) : SPACE_OVERHEAD * pow(2, i);
-        cout << "level:" << i << " number of bins:" << curNumberOfBins << " size of bins:" << curSizeOfEachBin << endl;
+//        cout << "level:" << i << " number of bins:" << curNumberOfBins << " size of bins:" << curSizeOfEachBin << endl;
         numberOfBins.push_back(curNumberOfBins);
         sizeOfEachBin.push_back(curSizeOfEachBin);
         //printf("TwoChoiceWithOneChoiceStorage Level:%d number of Bins:%d size of bin:%d\n", i, curNumberOfBins, curSizeOfEachBin);
     }
-    cout << endl;
+//    cout << endl;
 }
 
 bool TwoChoiceWithOneChoiceStorage::isInCache(long index, long pos) {
     long levelSize = numberOfBins[index];
-    long threshold = floor(levelSize * CACHE_PERCENTAGE);
+    long threshold = floor(levelSize * Utilities::CACHE_PERCENTAGE);
     if (pos < threshold) {
         return true;
     } else {
@@ -55,8 +55,8 @@ bool TwoChoiceWithOneChoiceStorage::setup(bool overwrite) {
             long alloc_size = AES_KEY_SIZE*maxSize;
             while (alloc_size > 0) {
                 long bs = min(alloc_size, 2147483648);
-                string command = string("dd if=/dev/zero bs=" + to_string(bs) + " count=1 >> " + filename);
-                cout << "command:" << command << endl;
+                string command = string("dd if=/dev/zero bs=" + to_string(bs) + " count=1 status=none >> " + filename);
+//                cout << "command:" << command << endl;
                 system(command.c_str());
                 alloc_size -= bs;
             }
@@ -180,8 +180,8 @@ vector<prf_type> TwoChoiceWithOneChoiceStorage::getAllData(long index) {
     //cout <<"getAll size:"<<size<<endl;
     if (Utilities::DROP_CACHE) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         //printf("drop cache time:%f\n", t);
         cacheTime += t;
@@ -238,17 +238,16 @@ vector<prf_type> TwoChoiceWithOneChoiceStorage::find(long index, prf_type mapKey
     }
     unsigned char* hash = Utilities::sha256((char*) mapKey.data(), AES_KEY_SIZE);
     if (cnt >= numberOfBins[index]) {
-        cout << "first part" << endl;
-        long fileLength = numberOfBins[index] * sizeOfEachBin[index] * AES_KEY_SIZE - floor(numberOfBins[index] * CACHE_PERCENTAGE) * sizeOfEachBin[index] * AES_KEY_SIZE;
+        long fileLength = numberOfBins[index] * sizeOfEachBin[index] * AES_KEY_SIZE - floor(numberOfBins[index] * Utilities::CACHE_PERCENTAGE) * sizeOfEachBin[index] * AES_KEY_SIZE;
         if (Utilities::DROP_CACHE) {
             Utilities::startTimer(113);
-            if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-            if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+            if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+            if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
             auto t = Utilities::stopTimer(113);
             cacheTime += t;
         }
         //        file.seekg(0, ios::beg);
-        fseek(file, floor(numberOfBins[index] * CACHE_PERCENTAGE) * sizeOfEachBin[index] * AES_KEY_SIZE, SEEK_SET);
+        fseek(file, floor(numberOfBins[index] * Utilities::CACHE_PERCENTAGE) * sizeOfEachBin[index] * AES_KEY_SIZE, SEEK_SET);
 
         char* keyValues = new char[fileLength];
         //        file.read(keyValues, fileLength);
@@ -268,7 +267,6 @@ vector<prf_type> TwoChoiceWithOneChoiceStorage::find(long index, prf_type mapKey
             results.push_back(tmp);
         }
     } else {
-        cout << "second part" << endl;
         long superBins = ceil((float) numberOfBins[index] / cnt);
         long pos = (unsigned long) (*((long*) hash)) % superBins; //numberOfBins[index];
         int cacheRead = 0;
@@ -300,8 +298,8 @@ vector<prf_type> TwoChoiceWithOneChoiceStorage::find(long index, prf_type mapKey
         }
         if (Utilities::DROP_CACHE) {
             Utilities::startTimer(113);
-            if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-            if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+            if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+            if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
             auto t = Utilities::stopTimer(113);
             cacheTime += t;
         }
@@ -310,7 +308,6 @@ vector<prf_type> TwoChoiceWithOneChoiceStorage::find(long index, prf_type mapKey
         SeekG++;
         char* keyValues = new char[readLength];
         //file.read(keyValues, readLength);
-        cout << "reading:" << readLength << " bytes from the file. cnt:" << cnt << " size of eachbin:" << sizeOfEachBin[index] << endl;
         fread(keyValues, readLength, 1, file);
         readBytes += readLength;
         for (long i = 0; i < readLength / AES_KEY_SIZE; i++) {
@@ -320,7 +317,6 @@ vector<prf_type> TwoChoiceWithOneChoiceStorage::find(long index, prf_type mapKey
         }
         delete keyValues;
         if (totalReadLength > 0) {
-            cout << "in the inner condition" << endl;
             readLength = totalReadLength;
 
             cnt = readLength / (AES_KEY_SIZE * sizeOfEachBin[index]);
@@ -344,8 +340,8 @@ vector<prf_type> TwoChoiceWithOneChoiceStorage::find(long index, prf_type mapKey
 
             if (Utilities::DROP_CACHE) {
                 Utilities::startTimer(113);
-                if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-                if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+                if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+                if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
                 auto t = Utilities::stopTimer(113);
                 cacheTime += t;
             }
@@ -375,12 +371,12 @@ vector<prf_type> TwoChoiceWithOneChoiceStorage::find(long index, prf_type mapKey
 }
 
 void TwoChoiceWithOneChoiceStorage::loadCache() {
-    if (CACHE_PERCENTAGE == 0) {
+    if (Utilities::CACHE_PERCENTAGE == 0) {
         return;
     }
     for (long index = 0; index < dataIndex; index++) {
         long levelSize = numberOfBins[index];
-        long size = floor(levelSize * CACHE_PERCENTAGE);
+        long size = floor(levelSize * Utilities::CACHE_PERCENTAGE);
         FILE* file = filehandles[index];
         if (file == NULL) {
             cerr << "Error in read: " << strerror(errno);

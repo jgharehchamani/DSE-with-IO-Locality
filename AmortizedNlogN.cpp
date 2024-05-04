@@ -6,7 +6,7 @@
 
 using namespace std;
 
-AmortizedNlogN::AmortizedNlogN(int N, bool inMemory, bool overwrite) {
+AmortizedNlogN::AmortizedNlogN(int N, bool inMemory, bool overwrite): DSEScheme() {
     int lev = floor(log2(N)) + 1;
     L = new NlogNClient(lev, inMemory, overwrite, profile);
 
@@ -133,8 +133,9 @@ void AmortizedNlogN::update(OP op, string keyword, int ind, bool setup) {
     }
     if (!setup) {
         auto updateTime = Utilities::stopTimer(33);
-        cout << "Total drop cache command time for Storage:[" << L->server->keywordCounters->cacheTime + L->server->storage->cacheTime << "]" << endl;
-        cout << "Update time - cache drop time =[" << updateTime - (L->server->keywordCounters->cacheTime + L->server->storage->cacheTime) << "]" << endl;
+//        cout << "Total drop cache command time for Storage:[" << L->server->keywordCounters->cacheTime + L->server->storage->cacheTime << "]" << endl;
+//        cout << "Update time - cache drop time =[" << updateTime - (L->server->keywordCounters->cacheTime + L->server->storage->cacheTime) << "]" << endl;
+        totalUpdateTime = updateTime - (L->server->keywordCounters->cacheTime + L->server->storage->cacheTime);
     }
 }
 
@@ -178,13 +179,14 @@ vector<int> AmortizedNlogN::search(string keyword) {
         }
     }
     filterationTime = Utilities::stopTimer(99);
-    cout << endl << endl << "TOTAL search BYTES read:{" << L->totalCommunication << "}" << endl;
-    cout << "TOTAL search TIME:[[" << L->searchTime << "]]" << endl;
-    printf("filteration time:%f\n", filterationTime);
+//    cout << endl << endl << "TOTAL search BYTES read:{" << L->totalCommunication << "}" << endl;
+//    cout << "TOTAL search TIME:[[" << L->searchTime << "]]" << endl;
+//    printf("filteration time:%f\n", filterationTime);
 
-    cout << "Total AmortizedNlogN Search time:" << searchTime + filterationTime << endl;
-    cout << "Total drop cache command time for Storage:[" << L->TotalCacheTime << "]" << endl;
-    cout << "Amort search time - cache drop time =[" << searchTime - L->TotalCacheTime << "]" << endl;
+//    cout << "Total AmortizedNlogN Search time:" << searchTime + filterationTime << endl;
+//    cout << "Total drop cache command time for Storage:[" << L->TotalCacheTime << "]" << endl;
+//    cout << "Amort search time - cache drop time =[" << searchTime - L->TotalCacheTime << "]" << endl;
+    totalSearchTime = searchTime - L->TotalCacheTime;
     //totalSearchCommSize += L->totalCommunication;
     //cout <<"-----------------------------------------------------------"<<endl;
     return finalRes;
@@ -223,7 +225,6 @@ void AmortizedNlogN::endSetup() {
     if (setup) {
         for (int i = 0; i < tmpLocalSize; i++) {
             if (setupData[i].size() > 0) {
-                cout << "END SETUP:" << i << endl;
                 unsigned char* newKey = new unsigned char[AES_KEY_SIZE];
                 memset(newKey, 0, AES_KEY_SIZE);
                 L->setup2(i, setupData[i], newKey);

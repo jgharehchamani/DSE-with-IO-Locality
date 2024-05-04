@@ -13,15 +13,13 @@ OneChoiceStorage::OneChoiceStorage(bool inMemory, long dataIndex, string fileAdd
         long curSizeOfEachBin = i > 1 ? 3 * (log2(pow(2, i)) * log2(log2(pow(2, i)))) : pow(2, i);
         numberOfBins.push_back(curNumberOfBins);
         sizeOfEachBin.push_back(curSizeOfEachBin);
-        cout << "One Choice Storage level:" << i << " number of bins:" << curNumberOfBins << " size of bins:" << curSizeOfEachBin << endl;
-        //printf("OneChoiceStorage Level:%d number of Bins:%d size of bin:%d\n", i, curNumberOfBins, curSizeOfEachBin);
     }
 
 }
 
 bool OneChoiceStorage::isInCache(long index, long pos) {
     long levelSize = numberOfBins[index];
-    long threshold = floor(levelSize * CACHE_PERCENTAGE);
+    long threshold = floor(levelSize * Utilities::CACHE_PERCENTAGE);
     if (pos < threshold) {
         return true;
     } else {
@@ -47,21 +45,11 @@ bool OneChoiceStorage::setup(bool overwrite) {
             long alloc_size = AES_KEY_SIZE*maxSize;
             while (alloc_size > 0) {
                 long bs = min(alloc_size, 2147483648);
-                string command = string("dd if=/dev/zero bs=" + to_string(bs) + " count=1 >> " + filename);
-                cout << "command:" << command << endl;
+                string command = string("dd if=/dev/zero bs=" + to_string(bs) + " count=1 status=none >> " + filename);
+//                cout << "command:" << command << endl;
                 system(command.c_str());
                 alloc_size -= bs;
             }
-            //                fstream file(filename.c_str(), std::ofstream::out);
-            //                if (file.fail()) {
-            //                    cerr << "Error: " << strerror(errno);
-            //                }
-            //
-            //                long maxSize = numberOfBins[i] * sizeOfEachBin[i];
-            //                for (long j = 0; j < maxSize; j++) {
-            //                    file.write((char*) nullKey.data(), AES_KEY_SIZE);
-            //                }
-            //                file.close();
         }
         FILE* file = fopen(filename.c_str(), "rb+");
         filehandles.push_back(file);
@@ -148,8 +136,8 @@ void OneChoiceStorage::insertAll(long index, vector<vector< prf_type > > ciphers
             fflush(file);
             if (Utilities::DROP_CACHE && !setupMode) {
                 Utilities::startTimer(113);
-                if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-                if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+                if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+                if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
                 auto t = Utilities::stopTimer(113);
                 //printf("drop cache time:%f\n", t);
                 cacheTime += t;
@@ -213,8 +201,8 @@ void OneChoiceStorage::insertAll(long index, vector< prf_type > ciphers, bool ap
             fflush(file);
             if (Utilities::DROP_CACHE && !setupMode) {
                 Utilities::startTimer(113);
-                if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-                if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+                if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+                if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
                 auto t = Utilities::stopTimer(113);
                 //printf("drop cache time:%f\n", t);
                 cacheTime += t;
@@ -233,8 +221,8 @@ vector<prf_type> OneChoiceStorage::getAllDataFlat(long index) {
     //        }
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         //printf("drop cache time:%f\n", t);
         cacheTime += t;
@@ -269,8 +257,8 @@ vector<vector<prf_type> >* OneChoiceStorage::getAllData(long index) {
     //        }
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         //printf("drop cache time:%f\n", t);
         cacheTime += t;
@@ -315,8 +303,8 @@ void OneChoiceStorage::clear(long index) {
     fflush(file);
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         //printf("drop cache time:%f\n", t);
         cacheTime += t;
@@ -354,13 +342,13 @@ vector<prf_type> OneChoiceStorage::find(long index, prf_type mapKey, long cnt) {
         }
         if (numberOfBins[index] * sizeOfEachBin[index] - cacheRead > 0) {
             //read everything
-            long fileLength = numberOfBins[index] * sizeOfEachBin[index] * AES_KEY_SIZE - floor(numberOfBins[index] * CACHE_PERCENTAGE) * sizeOfEachBin[index] * AES_KEY_SIZE;
-            fseek(file, floor(numberOfBins[index] * CACHE_PERCENTAGE) * sizeOfEachBin[index] * AES_KEY_SIZE, SEEK_SET);
+            long fileLength = numberOfBins[index] * sizeOfEachBin[index] * AES_KEY_SIZE - floor(numberOfBins[index] * Utilities::CACHE_PERCENTAGE) * sizeOfEachBin[index] * AES_KEY_SIZE;
+            fseek(file, floor(numberOfBins[index] * Utilities::CACHE_PERCENTAGE) * sizeOfEachBin[index] * AES_KEY_SIZE, SEEK_SET);
             char* keyValues = new char[fileLength];
             if (Utilities::DROP_CACHE && !setupMode) {
                 Utilities::startTimer(113);
-                if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-                if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+                if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+                if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
                 auto t = Utilities::stopTimer(113);
                 //                printf("drop cache time:%f\n", t);
                 cacheTime += t;
@@ -420,8 +408,8 @@ vector<prf_type> OneChoiceStorage::find(long index, prf_type mapKey, long cnt) {
         //        printf("second time:%f\n", hh);
         if (Utilities::DROP_CACHE && !setupMode) {
             Utilities::startTimer(113);
-            if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-            if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+            if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+            if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
             auto t = Utilities::stopTimer(113);
             //            printf("drop cache time:%f\n", t);
             cacheTime += t;
@@ -471,8 +459,8 @@ vector<prf_type> OneChoiceStorage::find(long index, prf_type mapKey, long cnt) {
 
             if (Utilities::DROP_CACHE && !setupMode) {
                 Utilities::startTimer(113);
-                if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-                if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+                if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+                if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
                 auto t = Utilities::stopTimer(113);
                 //                printf("drop cache time:%f\n", t);
                 cacheTime += t;
@@ -538,8 +526,8 @@ void OneChoiceStorage::resetup(long index) {
     long maxSize = numberOfBins[index] * sizeOfEachBin[index];
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda > /dev/null 2>sda1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches > /dev/null 2>sda1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -553,12 +541,12 @@ void OneChoiceStorage::resetup(long index) {
 }
 
 void OneChoiceStorage::loadCache() {
-    if (CACHE_PERCENTAGE == 0) {
+    if (Utilities::CACHE_PERCENTAGE == 0) {
         return;
     }
     for (long index = 0; index < dataIndex; index++) {
         long levelSize = numberOfBins[index];
-        long size = floor(levelSize * CACHE_PERCENTAGE);
+        long size = floor(levelSize * Utilities::CACHE_PERCENTAGE);
         FILE* file = filehandles[index];
         if (file == NULL) {
             cerr << "Error in read: " << strerror(errno);

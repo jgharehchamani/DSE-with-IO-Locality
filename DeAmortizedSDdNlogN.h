@@ -18,7 +18,7 @@
 //#include <boost/algorithm/string/split.hpp>
 //#include <boost/algorithm/string/classification.hpp>
 //#include <sse/crypto/hash.hpp>
-
+#include "DSEScheme.h"
 using namespace std;
 
 /*
@@ -27,7 +27,7 @@ enum OP
     INS, DEL
 };
  */
-class DeAmortizedSDdNlogN {
+class DeAmortizedSDdNlogN : public DSEScheme {
 private:
     inline prf_type bitwiseXOR(int input1, int op, prf_type input2);
     inline prf_type bitwiseXOR(prf_type input1, prf_type input2);
@@ -58,6 +58,7 @@ private:
     std::vector<byte> setupPairs2;
 
 public:
+    double totalCacheTime = 0;
     prf_type createKeyVal(string keyword, int ind, OP op);
     prf_type createKeyVal(string keyword, int cntw);
     DeAmortizedSDdNlogN(int N, bool inMemory, bool overwrite);

@@ -29,7 +29,7 @@ OneChoiceSDdGeneralClient::OneChoiceSDdGeneralClient(int N, bool inMemory, bool 
         sizeOfEachBin.push_back(curSizeOfEachBin);
         int is = curNumberOfBins*curSizeOfEachBin;
         indexSize.push_back(is);
-        printf("Index:%d #of Bins:%d size of bin:%d is:%d\n", j, curNumberOfBins, curSizeOfEachBin, is);
+//        printf("Index:%d #of Bins:%d size of bin:%d is:%d\n", j, curNumberOfBins, curSizeOfEachBin, is);
     }
     exist.resize(4);
     setupFiles.resize(numOfIndices);
@@ -65,7 +65,7 @@ vector<prf_type> OneChoiceSDdGeneralClient::search(int index, int instance, stri
     Utilities::startTimer(65);
     int keywordCount = server->getCounter(instance, index, K);
     auto t = Utilities::stopTimer(65);
-    cout << "index:" << index << " getCounter:" << keywordCount << " time:" << t << endl;
+//    cout << "index:" << index << " getCounter:" << keywordCount << " time:" << t << endl;
     if (keywordCount > 0) {
         //cout <<"index:"<<index<<" instance:"<<instance<<" counter:"<<keywordCount<<endl;
         vector<prf_type> ciphers = server->search(instance, index, K, keywordCount);
@@ -86,11 +86,11 @@ vector<prf_type> OneChoiceSDdGeneralClient::search(int index, int instance, stri
     }
     TotalCacheTime += cachet;
     auto aa = Utilities::stopTimer(77);
-    cout << "level time:" << aa << endl;
-    cout << "level cache time:" << cachet << endl;
-    cout << "level pure time:" << aa - cachet << endl;
+//    cout << "level time:" << aa << endl;
+//    cout << "level cache time:" << cachet << endl;
+//    cout << "level pure time:" << aa - cachet << endl;
     searchTime += aa;
-    cout << finalRes.size() << "/" << keywordCount << endl;
+//    cout << finalRes.size() << "/" << keywordCount << endl;
     return finalRes;
 }
 

@@ -11,7 +11,7 @@ Storage::Storage(bool inMemory, long dataIndex, string fileAddressPrefix, bool p
 
 bool Storage::isInCache(long index, long pos) {
     long levelSize = pow(2, index + 1);
-    long threshold = floor(levelSize * CACHE_PERCENTAGE);
+    long threshold = floor(levelSize * Utilities::CACHE_PERCENTAGE);
     if (pos < threshold) {
         return true;
     } else {
@@ -32,23 +32,11 @@ bool Storage::setup(bool overwrite) {
             long alloc_size = ((long) 2 * AES_KEY_SIZE + sizeof (long)) * maxSize;
             while (alloc_size > 0) {
                 long bs = min(alloc_size, 2147483648);
-                string command = string("dd if=/dev/zero bs=" + to_string(bs) + " count=1 >> " + filename);
-                cout << "command:" << command << endl;
+                string command = string("dd if=/dev/zero bs=" + to_string(bs) + " count=1 status=none >> " + filename);
+//                cout << "command:" << command << endl;
                 system(command.c_str());
                 alloc_size -= bs;
             }
-            //                FILE* file = fopen(filename.c_str(), "wb");
-            //                if (file == NULL) {
-            //                    cerr << "Error: " << strerror(errno);
-            //                }
-            //                long maxSize = pow(2, i + 1); //double the size
-            //                long nextPtr = 0;
-            //                for (long j = 0; j < maxSize; j++) {                    
-            //                    fwrite((char*) nullKey.data(), AES_KEY_SIZE, 1, file);
-            //                    fwrite((char*) nullKey.data(), AES_KEY_SIZE, 1, file);
-            //                    fwrite((char*) &nextPtr, sizeof (long), 1, file);
-            //                }                
-            //                fclose(file);
         }
         FILE* file = fopen(filename.c_str(), "rb+");
         filehandles.push_back(file);
@@ -93,12 +81,12 @@ bool Storage::setup(bool overwrite, int index) {
 }
 
 void Storage::loadCache() {
-    if (CACHE_PERCENTAGE == 0) {
+    if (Utilities::CACHE_PERCENTAGE == 0) {
         return;
     }
     for (long index = 0; index < dataIndex; index++) {
         long levelSize = pow(2, index + 1);
-        long size = floor(levelSize * CACHE_PERCENTAGE);
+        long size = floor(levelSize * Utilities::CACHE_PERCENTAGE);
         FILE* file = filehandles[index];
         if (file == NULL) {
             cerr << "Error in read: " << strerror(errno);
@@ -138,9 +126,9 @@ void Storage::insert(long dataIndex, map<prf_type, prf_type> ciphers, bool setup
 
         int tmpCounter = 0;
         for (auto item : ciphers) {
-            if (tmpCounter % 100000 == 0) {
-                cout << "inserted " << tmpCounter << "/" << ciphers.size() << endl;
-            }
+//            if (tmpCounter % 100000 == 0) {
+//                cout << "inserted " << tmpCounter << "/" << ciphers.size() << endl;
+//            }
             unsigned char newRecord[KEY_VALUE_SIZE];
             memset(newRecord, 0, KEY_VALUE_SIZE);
             std::copy(item.first.begin(), item.first.end(), newRecord);
@@ -197,8 +185,8 @@ void Storage::insert(long dataIndex, map<prf_type, prf_type> ciphers, bool setup
             //file.seekg(pos * KEY_VALUE_SIZE, ios::beg);
             if (Utilities::DROP_CACHE && !setupMode) {
                 Utilities::startTimer(113);
-                if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-                if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+                if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+                if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
                 auto t = Utilities::stopTimer(113);
                 cacheTime += t;
                 //            cout << "cache time:" << t << endl;
@@ -218,8 +206,8 @@ void Storage::insert(long dataIndex, map<prf_type, prf_type> ciphers, bool setup
                 //file.seekg(pos*KEY_VALUE_SIZE, ios::beg);
                 if (Utilities::DROP_CACHE && !setupMode) {
                     Utilities::startTimer(113);
-                    if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-                    if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+                    if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+                    if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
                     auto t = Utilities::stopTimer(113);
                     cacheTime += t;
                     //            cout << "cache time:" << t << endl;
@@ -237,8 +225,8 @@ void Storage::insert(long dataIndex, map<prf_type, prf_type> ciphers, bool setup
                 //file.seekg(pos*KEY_VALUE_SIZE, ios::beg);
                 if (Utilities::DROP_CACHE && !setupMode) {
                     Utilities::startTimer(113);
-                    if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-                    if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+                    if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+                    if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
                     auto t = Utilities::stopTimer(113);
                     cacheTime += t;
                     //            cout << "cache time:" << t << endl;
@@ -273,9 +261,9 @@ void Storage::insert(long dataIndex, unordered_map<prf_type, prf_type, PRFHasher
 
         int tmpCounter = 0;
         for (auto item : ciphers) {
-            if (tmpCounter % 100000 == 0) {
-                cout << "inserted " << tmpCounter << "/" << ciphers.size() << endl;
-            }
+//            if (tmpCounter % 100000 == 0) {
+//                cout << "inserted " << tmpCounter << "/" << ciphers.size() << endl;
+//            }
             unsigned char newRecord[KEY_VALUE_SIZE];
             memset(newRecord, 0, KEY_VALUE_SIZE);
             std::copy(item.first.begin(), item.first.end(), newRecord);
@@ -330,8 +318,8 @@ void Storage::insert(long dataIndex, unordered_map<prf_type, prf_type, PRFHasher
             //file.seekg(pos * KEY_VALUE_SIZE, ios::beg);
             if (Utilities::DROP_CACHE && !setupMode) {
                 Utilities::startTimer(113);
-                if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-                if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+                if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+                if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
                 auto t = Utilities::stopTimer(113);
                 cacheTime += t;
                 //            cout << "cache time:" << t << endl;
@@ -351,8 +339,8 @@ void Storage::insert(long dataIndex, unordered_map<prf_type, prf_type, PRFHasher
                 //file.seekg(pos*KEY_VALUE_SIZE, ios::beg);
                 if (Utilities::DROP_CACHE && !setupMode) {
                     Utilities::startTimer(113);
-                    if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-                    if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+                    if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+                    if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
                     auto t = Utilities::stopTimer(113);
                     cacheTime += t;
                     //            cout << "cache time:" << t << endl;
@@ -370,8 +358,8 @@ void Storage::insert(long dataIndex, unordered_map<prf_type, prf_type, PRFHasher
                 //file.seekg(pos*KEY_VALUE_SIZE, ios::beg);
                 if (Utilities::DROP_CACHE && !setupMode) {
                     Utilities::startTimer(113);
-                    if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-                    if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+                    if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+                    if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
                     auto t = Utilities::stopTimer(113);
                     cacheTime += t;
                     //            cout << "cache time:" << t << endl;
@@ -402,8 +390,8 @@ vector<prf_type> Storage::getAllData(long dataIndex) {
     long size = ftell(file);
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -445,8 +433,8 @@ unordered_map<prf_type, prf_type, PRFHasher>* Storage::getAllDataPairs(long data
     long size = ftell(file);
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -495,8 +483,8 @@ void Storage::clear(long index) {
     fflush(file);
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
         //            cout << "cache time:" << t << endl;
@@ -540,8 +528,8 @@ prf_type Storage::find(long index, prf_type mapKey, bool& found) {
         } else {
             if (Utilities::DROP_CACHE && !setupMode) {
                 Utilities::startTimer(113);
-                if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-                if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+                if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+                if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
                 auto t = Utilities::stopTimer(113);
                 cacheTime += t;
             }
@@ -707,8 +695,8 @@ bool Storage::erase(long index, prf_type mapKey, bool& found) {
     do {
         if (Utilities::DROP_CACHE && !setupMode) {
             Utilities::startTimer(113);
-            if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-            if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+            if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+            if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
             auto t = Utilities::stopTimer(113);
             cacheTime += t;
             //            cout << "cache time:" << t << endl;
@@ -751,8 +739,8 @@ bool Storage::erase(long index, prf_type mapKey, bool& found) {
         //file.write((char*) newRecord, KEY_VALUE_SIZE);
         if (Utilities::DROP_CACHE && !setupMode) {
             Utilities::startTimer(113);
-            if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-            if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+            if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+            if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
             auto t = Utilities::stopTimer(113);
             cacheTime += t;
             //            cout << "cache time:" << t << endl;
@@ -792,8 +780,8 @@ bool Storage::replace(long index, prf_type mapKey, bool& found, prf_type newVal)
     do {
         if (Utilities::DROP_CACHE && !setupMode) {
             Utilities::startTimer(113);
-            if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-            if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+            if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+            if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
             auto t = Utilities::stopTimer(113);
             cacheTime += t;
             //            cout << "cache time:" << t << endl;
@@ -836,8 +824,8 @@ bool Storage::replace(long index, prf_type mapKey, bool& found, prf_type newVal)
         //file.write((char*) newRecord, KEY_VALUE_SIZE);
         if (Utilities::DROP_CACHE && !setupMode) {
             Utilities::startTimer(113);
-            if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-            if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+            if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+            if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
             auto t = Utilities::stopTimer(113);
             cacheTime += t;
             //            cout << "cache time:" << t << endl;
@@ -880,8 +868,8 @@ void Storage::resetup(long index) {
     long nextPtr = 0;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda > /dev/null 2>sda1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches > /dev/null 2>sda1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }

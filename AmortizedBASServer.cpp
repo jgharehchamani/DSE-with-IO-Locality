@@ -21,9 +21,9 @@ vector<prf_type> AmortizedBASServer::search(int dataIndex, prf_type token) {
     int cnt = 0;
     double serverSearchTime = 0;
     do {
-        if (cnt % 1000 == 0) {
-            cout << "searching for " << cnt << endl;
-        }
+//        if (cnt % 1000 == 0) {
+//            cout << "searching for " << cnt << endl;
+//        }
         prf_type curToken = token, mapKey;
         unsigned char cntstr[AES_KEY_SIZE];
         memset(cntstr, 0, AES_KEY_SIZE);
@@ -45,9 +45,6 @@ vector<prf_type> AmortizedBASServer::search(int dataIndex, prf_type token) {
             exist = false;
         }
     } while (exist);
-    if (profile) {
-        printf("server Search Time:%f number of SeekG:%d number of read bytes:%d\n", serverSearchTime, storage->seekgCount, storage->KEY_VALUE_SIZE * storage->seekgCount);
-    }
     return results;
 }
 

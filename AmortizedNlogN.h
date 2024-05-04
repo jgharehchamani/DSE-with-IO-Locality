@@ -12,16 +12,12 @@
 #include "Utilities.h"
 #include "AmortizedBASClient.h"
 #include "OneChoiceClient.h"
-#include "TwoChoicePPwithStashClient.h"
 #include "TwoChoiceWithOneChoiceClient.h"
-#include "TwoChoiceWithTunableLocalityClient.h"
-#include "TwoChoicePPWithTunableLocalityClient.h"
 #include "NlogNClient.h"
-#include "NlogNWithOptimalLocalityClient.h"
-#include "NlogNWithTunableLocalityClient.h"
 #include "AES.hpp"
 #include <set>
 #include <unordered_map>
+#include "DSEScheme.h"
 
 using namespace std;
 
@@ -30,7 +26,7 @@ enum OP {
     INS, DEL
 };
  */
-class AmortizedNlogN {
+class AmortizedNlogN : public DSEScheme {
 private:
     inline prf_type bitwiseXOR(int input1, int op, prf_type input2);
     inline prf_type bitwiseXOR(prf_type input1, prf_type input2);

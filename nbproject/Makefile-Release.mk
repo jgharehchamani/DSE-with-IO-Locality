@@ -37,7 +37,6 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/AES.o \
 	${OBJECTDIR}/AVLTree.o \
-	${OBJECTDIR}/Amortized3.o \
 	${OBJECTDIR}/AmortizedBASClient.o \
 	${OBJECTDIR}/AmortizedBASServer.o \
 	${OBJECTDIR}/AmortizedNlogN.o \
@@ -50,28 +49,15 @@ OBJECTFILES= \
 	${OBJECTDIR}/DeAmortizedSDdBAS.o \
 	${OBJECTDIR}/DeAmortizedSDdGeneral.o \
 	${OBJECTDIR}/DeAmortizedSDdNlogN.o \
-	${OBJECTDIR}/DeAmortizedSDdPlaintext.o \
 	${OBJECTDIR}/NlogNClient.o \
 	${OBJECTDIR}/NlogNSDdGeneralClient.o \
 	${OBJECTDIR}/NlogNServer.o \
 	${OBJECTDIR}/NlogNStorage.o \
-	${OBJECTDIR}/NlogNWithOptimalLocalityClient.o \
-	${OBJECTDIR}/NlogNWithOptimalLocalityServer.o \
-	${OBJECTDIR}/NlogNWithOptimalLocalityStorage.o \
-	${OBJECTDIR}/NlogNWithTunableLocalityClient.o \
-	${OBJECTDIR}/NlogNWithTunableLocalityServer.o \
-	${OBJECTDIR}/NlogNWithTunableLocalityStorage.o \
 	${OBJECTDIR}/OMAP.o \
 	${OBJECTDIR}/ORAM.o \
 	${OBJECTDIR}/OneChoiceClient.o \
 	${OBJECTDIR}/OneChoiceSDdGeneralClient.o \
 	${OBJECTDIR}/OneChoiceSDdGeneralServer.o \
-	${OBJECTDIR}/OneChoiceSDdNoOMAPClient.o \
-	${OBJECTDIR}/OneChoiceSDdNoOMAPServer.o \
-	${OBJECTDIR}/OneChoiceSDdNoOMAPStorage.o \
-	${OBJECTDIR}/OneChoiceSDdOMAPClient.o \
-	${OBJECTDIR}/OneChoiceSDdOMAPServer.o \
-	${OBJECTDIR}/OneChoiceSDdOMAPStorage.o \
 	${OBJECTDIR}/OneChoiceServer.o \
 	${OBJECTDIR}/OneChoiceStorage.o \
 	${OBJECTDIR}/RAMStore.o \
@@ -81,22 +67,11 @@ OBJECTFILES= \
 	${OBJECTDIR}/StorageSDd.o \
 	${OBJECTDIR}/TransientStorage.o \
 	${OBJECTDIR}/TransientStorage2D.o \
-	${OBJECTDIR}/TwoChoicePPWithTunableLocalityClient.o \
-	${OBJECTDIR}/TwoChoicePPWithTunableLocalityServer.o \
-	${OBJECTDIR}/TwoChoicePPWithTunableLocalityStorage.o \
-	${OBJECTDIR}/TwoChoicePPwithStashClient.o \
-	${OBJECTDIR}/TwoChoicePPwithStashServer.o \
-	${OBJECTDIR}/TwoChoicePPwithStashStorage.o \
 	${OBJECTDIR}/TwoChoiceWithOneChoiceClient.o \
 	${OBJECTDIR}/TwoChoiceWithOneChoiceServer.o \
 	${OBJECTDIR}/TwoChoiceWithOneChoiceStorage.o \
-	${OBJECTDIR}/TwoChoiceWithTunableLocalityClient.o \
-	${OBJECTDIR}/TwoChoiceWithTunableLocalityServer.o \
-	${OBJECTDIR}/TwoChoiceWithTunableLocalityStorage.o \
 	${OBJECTDIR}/Utilities.o \
-	${OBJECTDIR}/logger.o \
-	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/utils.o
+	${OBJECTDIR}/main.o
 
 
 # C Compiler Flags
@@ -117,11 +92,11 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/dse-with-io-locality
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/io-dse
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/dse-with-io-locality: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/io-dse: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/dse-with-io-locality ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/io-dse ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/AES.o: AES.cpp
 	${MKDIR} -p ${OBJECTDIR}
@@ -132,11 +107,6 @@ ${OBJECTDIR}/AVLTree.o: AVLTree.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVLTree.o AVLTree.cpp
-
-${OBJECTDIR}/Amortized3.o: Amortized3.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Amortized3.o Amortized3.cpp
 
 ${OBJECTDIR}/AmortizedBASClient.o: AmortizedBASClient.cpp
 	${MKDIR} -p ${OBJECTDIR}
@@ -198,11 +168,6 @@ ${OBJECTDIR}/DeAmortizedSDdNlogN.o: DeAmortizedSDdNlogN.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/DeAmortizedSDdNlogN.o DeAmortizedSDdNlogN.cpp
 
-${OBJECTDIR}/DeAmortizedSDdPlaintext.o: DeAmortizedSDdPlaintext.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/DeAmortizedSDdPlaintext.o DeAmortizedSDdPlaintext.cpp
-
 ${OBJECTDIR}/NlogNClient.o: NlogNClient.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -222,36 +187,6 @@ ${OBJECTDIR}/NlogNStorage.o: NlogNStorage.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/NlogNStorage.o NlogNStorage.cpp
-
-${OBJECTDIR}/NlogNWithOptimalLocalityClient.o: NlogNWithOptimalLocalityClient.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/NlogNWithOptimalLocalityClient.o NlogNWithOptimalLocalityClient.cpp
-
-${OBJECTDIR}/NlogNWithOptimalLocalityServer.o: NlogNWithOptimalLocalityServer.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/NlogNWithOptimalLocalityServer.o NlogNWithOptimalLocalityServer.cpp
-
-${OBJECTDIR}/NlogNWithOptimalLocalityStorage.o: NlogNWithOptimalLocalityStorage.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/NlogNWithOptimalLocalityStorage.o NlogNWithOptimalLocalityStorage.cpp
-
-${OBJECTDIR}/NlogNWithTunableLocalityClient.o: NlogNWithTunableLocalityClient.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/NlogNWithTunableLocalityClient.o NlogNWithTunableLocalityClient.cpp
-
-${OBJECTDIR}/NlogNWithTunableLocalityServer.o: NlogNWithTunableLocalityServer.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/NlogNWithTunableLocalityServer.o NlogNWithTunableLocalityServer.cpp
-
-${OBJECTDIR}/NlogNWithTunableLocalityStorage.o: NlogNWithTunableLocalityStorage.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/NlogNWithTunableLocalityStorage.o NlogNWithTunableLocalityStorage.cpp
 
 ${OBJECTDIR}/OMAP.o: OMAP.cpp
 	${MKDIR} -p ${OBJECTDIR}
@@ -277,36 +212,6 @@ ${OBJECTDIR}/OneChoiceSDdGeneralServer.o: OneChoiceSDdGeneralServer.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/OneChoiceSDdGeneralServer.o OneChoiceSDdGeneralServer.cpp
-
-${OBJECTDIR}/OneChoiceSDdNoOMAPClient.o: OneChoiceSDdNoOMAPClient.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/OneChoiceSDdNoOMAPClient.o OneChoiceSDdNoOMAPClient.cpp
-
-${OBJECTDIR}/OneChoiceSDdNoOMAPServer.o: OneChoiceSDdNoOMAPServer.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/OneChoiceSDdNoOMAPServer.o OneChoiceSDdNoOMAPServer.cpp
-
-${OBJECTDIR}/OneChoiceSDdNoOMAPStorage.o: OneChoiceSDdNoOMAPStorage.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/OneChoiceSDdNoOMAPStorage.o OneChoiceSDdNoOMAPStorage.cpp
-
-${OBJECTDIR}/OneChoiceSDdOMAPClient.o: OneChoiceSDdOMAPClient.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/OneChoiceSDdOMAPClient.o OneChoiceSDdOMAPClient.cpp
-
-${OBJECTDIR}/OneChoiceSDdOMAPServer.o: OneChoiceSDdOMAPServer.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/OneChoiceSDdOMAPServer.o OneChoiceSDdOMAPServer.cpp
-
-${OBJECTDIR}/OneChoiceSDdOMAPStorage.o: OneChoiceSDdOMAPStorage.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/OneChoiceSDdOMAPStorage.o OneChoiceSDdOMAPStorage.cpp
 
 ${OBJECTDIR}/OneChoiceServer.o: OneChoiceServer.cpp
 	${MKDIR} -p ${OBJECTDIR}
@@ -353,36 +258,6 @@ ${OBJECTDIR}/TransientStorage2D.o: TransientStorage2D.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TransientStorage2D.o TransientStorage2D.cpp
 
-${OBJECTDIR}/TwoChoicePPWithTunableLocalityClient.o: TwoChoicePPWithTunableLocalityClient.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TwoChoicePPWithTunableLocalityClient.o TwoChoicePPWithTunableLocalityClient.cpp
-
-${OBJECTDIR}/TwoChoicePPWithTunableLocalityServer.o: TwoChoicePPWithTunableLocalityServer.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TwoChoicePPWithTunableLocalityServer.o TwoChoicePPWithTunableLocalityServer.cpp
-
-${OBJECTDIR}/TwoChoicePPWithTunableLocalityStorage.o: TwoChoicePPWithTunableLocalityStorage.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TwoChoicePPWithTunableLocalityStorage.o TwoChoicePPWithTunableLocalityStorage.cpp
-
-${OBJECTDIR}/TwoChoicePPwithStashClient.o: TwoChoicePPwithStashClient.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TwoChoicePPwithStashClient.o TwoChoicePPwithStashClient.cpp
-
-${OBJECTDIR}/TwoChoicePPwithStashServer.o: TwoChoicePPwithStashServer.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TwoChoicePPwithStashServer.o TwoChoicePPwithStashServer.cpp
-
-${OBJECTDIR}/TwoChoicePPwithStashStorage.o: TwoChoicePPwithStashStorage.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TwoChoicePPwithStashStorage.o TwoChoicePPwithStashStorage.cpp
-
 ${OBJECTDIR}/TwoChoiceWithOneChoiceClient.o: TwoChoiceWithOneChoiceClient.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -398,40 +273,15 @@ ${OBJECTDIR}/TwoChoiceWithOneChoiceStorage.o: TwoChoiceWithOneChoiceStorage.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TwoChoiceWithOneChoiceStorage.o TwoChoiceWithOneChoiceStorage.cpp
 
-${OBJECTDIR}/TwoChoiceWithTunableLocalityClient.o: TwoChoiceWithTunableLocalityClient.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TwoChoiceWithTunableLocalityClient.o TwoChoiceWithTunableLocalityClient.cpp
-
-${OBJECTDIR}/TwoChoiceWithTunableLocalityServer.o: TwoChoiceWithTunableLocalityServer.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TwoChoiceWithTunableLocalityServer.o TwoChoiceWithTunableLocalityServer.cpp
-
-${OBJECTDIR}/TwoChoiceWithTunableLocalityStorage.o: TwoChoiceWithTunableLocalityStorage.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TwoChoiceWithTunableLocalityStorage.o TwoChoiceWithTunableLocalityStorage.cpp
-
 ${OBJECTDIR}/Utilities.o: Utilities.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Utilities.o Utilities.cpp
 
-${OBJECTDIR}/logger.o: logger.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/logger.o logger.cpp
-
 ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
-
-${OBJECTDIR}/utils.o: utils.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utils.o utils.cpp
 
 # Subprojects
 .build-subprojects:

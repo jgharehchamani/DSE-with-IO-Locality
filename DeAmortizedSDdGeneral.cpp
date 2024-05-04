@@ -9,8 +9,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-DeAmortizedSDdGeneral::DeAmortizedSDdGeneral(int N, bool inMemory, bool overwrite) {
-    cout << "=====================Running SDd+OneChoiceAllocation======================" << endl;
+DeAmortizedSDdGeneral::DeAmortizedSDdGeneral(int N, bool inMemory, bool overwrite) : DSEScheme(){
     L = new OneChoiceSDdGeneralClient(N, inMemory, overwrite, false);
     this->overwrite = overwrite;
     this->deleteFiles = deleteFiles;
@@ -121,6 +120,7 @@ void DeAmortizedSDdGeneral::update(OP op, string keyword, int ind, bool setup) {
         return;
     }
     if (!setup) {
+        Utilities::startTimer(33);
         L->totalCommunication = 0;
         totalUpdateCommSize = 0;
         L->server->storage[0]->cacheTime = 0;
@@ -314,6 +314,7 @@ void DeAmortizedSDdGeneral::update(OP op, string keyword, int ind, bool setup) {
         }
     }
     if (!setup) {
+        auto updateT = Utilities::stopTimer(33);
         totalUpdateCommSize += L->totalCommunication;
         totalCacheTime += L->server->storage[0]->cacheTime;
         totalCacheTime += L->server->storage[1]->cacheTime;
@@ -348,6 +349,7 @@ void DeAmortizedSDdGeneral::update(OP op, string keyword, int ind, bool setup) {
                 totalCacheTime += L->server->updateData[i].ciphertextsdisk[j]->cacheTime;
             }
         }
+        totalUpdateTime = updateT - totalCacheTime;
     }
 
 }
@@ -413,7 +415,7 @@ vector<int> DeAmortizedSDdGeneral::search(string keyword) {
             }
         }
     }
-    cout << "ServerTime:" << serverTime << endl;
+//    cout << "ServerTime:" << serverTime << endl;
     double filterationTime = 0;
     auto searchTime = Utilities::stopTimer(33);
     Utilities::startTimer(99);
@@ -433,14 +435,15 @@ vector<int> DeAmortizedSDdGeneral::search(string keyword) {
         }
     }
     filterationTime = Utilities::stopTimer(99);
-    cout << endl << endl << "TOTAL search BYTES read:{" << L->totalCommunication << "}" << endl;
-    cout << "TOTAL search TIME:[[" << L->searchTime << "]]" << endl;
-    printf("filteration time:%f\n", filterationTime);
+//    cout << endl << endl << "TOTAL search BYTES read:{" << L->totalCommunication << "}" << endl;
+//    cout << "TOTAL search TIME:[[" << L->searchTime << "]]" << endl;
+//    printf("filteration time:%f\n", filterationTime);
 
-    cout << "Total Amortized1 Search time:" << searchTime << "/" << L->searchTime << endl;
-    cout << "Total drop cache command time for Storage:[" << L->TotalCacheTime << "]" << endl;
-    cout << "Amort search time - cache drop time =[" << searchTime + filterationTime - L->TotalCacheTime << "]" << endl;
+//    cout << "Total Amortized1 Search time:" << searchTime << "/" << L->searchTime << endl;
+//    cout << "Total drop cache command time for Storage:[" << L->TotalCacheTime << "]" << endl;
+//    cout << "Amort search time - cache drop time =[" << searchTime + filterationTime - L->TotalCacheTime << "]" << endl;
     totalSearchCommSize += L->totalCommunication;
+    totalSearchTime=searchTime + filterationTime - L->TotalCacheTime;
     return finalRes;
 }
 

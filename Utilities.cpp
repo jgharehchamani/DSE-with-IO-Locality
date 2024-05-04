@@ -33,7 +33,15 @@ std::string Utilities::testKeyword;
 int Utilities::numOfFile = 0;
 int Utilities::TotalCacheSize = 1024 * 1024 / 4;
 std::string Utilities::rootAddress = "/tmp/tmp/";
-bool Utilities::useRandomFolder = true;
+bool Utilities::useRandomFolder = false;
+int Utilities::JUMP_SIZE = 1;
+int Utilities::CACHE_PERCENTAGE = 0;
+std::string Utilities::HDD_DROP_CACHE_COMMAND = "sudo hdparm -A 0 /dev/sda >/dev/null 2>&1";
+std::string Utilities::SSD_DROP_CACHE_COMMAND = "sudo nvme set-feature -f 6 -v 0 /dev/nvme0n1 >/dev/null 2>&1";
+std::string Utilities::KERNEL_DROP_CACHE_COMMAND = "echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1";
+bool Utilities::HDD_CACHE = true;
+bool Utilities::KERNEL_CACHE = true;
+bool Utilities::SSD_CACHE = false;
 
 Utilities::Utilities() {
     memset(key, 0x00, AES_KEY_SIZE);

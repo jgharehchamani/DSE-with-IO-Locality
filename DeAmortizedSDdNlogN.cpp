@@ -9,8 +9,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-DeAmortizedSDdNlogN::DeAmortizedSDdNlogN(int N, bool inMemory, bool overwrite) {
-    cout << "=====================Running SDd+OneChoiceAllocation======================" << endl;
+DeAmortizedSDdNlogN::DeAmortizedSDdNlogN(int N, bool inMemory, bool overwrite) : DSEScheme(){
     L = new NlogNSDdGeneralClient(N, inMemory, overwrite, false);
     this->overwrite = overwrite;
     this->deleteFiles = deleteFiles;
@@ -250,17 +249,18 @@ vector<int> DeAmortizedSDdNlogN::search(string keyword) {
         }
     }
     filterationTime = Utilities::stopTimer(99);
-    cout << "TOTAL search TIME:[[" << L->searchTime << "]]" << endl;
-    printf("filteration time:%f\n", filterationTime);
+//    cout << "TOTAL search TIME:[[" << L->searchTime << "]]" << endl;
+//    printf("filteration time:%f\n", filterationTime);
 
-    cout << "Total Amortized1 Search time:" << searchTime << "/" << L->searchTime << endl;
-    cout << "Total drop cache command time for Storage:[" << L->TotalCacheTime << "]" << endl;
-    cout << "Amort search time - cache drop time =[" << searchTime + filterationTime - L->TotalCacheTime << "]" << endl;
+//    cout << "Total Amortized1 Search time:" << searchTime << "/" << L->searchTime << endl;
+//    cout << "Total drop cache command time for Storage:[" << L->TotalCacheTime << "]" << endl;
+//    cout << "Amort search time - cache drop time =[" << searchTime + filterationTime - L->TotalCacheTime << "]" << endl;
     //    for (int i = 0; i < l; i++) {
     //        totalSearchCommSize += (L->omaps[i]->treeHandler->oram->totalRead +
     //                L->omaps[i]->treeHandler->oram->totalWrite)*(sizeof (prf_type) + sizeof (int));
     //    }
     totalSearchCommSize += L->totalCommunication;
+    totalSearchTime = searchTime + filterationTime - L->TotalCacheTime;
     return finalRes;
 }
 

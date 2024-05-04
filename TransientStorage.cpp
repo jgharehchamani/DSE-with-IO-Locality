@@ -129,8 +129,8 @@ void TransientStorage::insertPairList(long dataIndex, map<long, pair<prf_type, p
         //file.seekg(pos * KEY_VALUE_SIZE, ios::beg);
         //        if (Utilities::DROP_CACHE && !setupMode) {
         //            Utilities::startTimer(113);
-        //            if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        //            if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        //            if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        //            if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         //            auto t = Utilities::stopTimer(113);
         //            cacheTime += t;
         //            //            cout << "cache time:" << t << endl;
@@ -149,8 +149,8 @@ void TransientStorage::insertPairList(long dataIndex, map<long, pair<prf_type, p
         //            //file.seekg(pos*KEY_VALUE_SIZE, ios::beg);
         //            if (Utilities::DROP_CACHE && !setupMode) {
         //                Utilities::startTimer(113);
-        //                if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        //                if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        //                if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        //                if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         //                auto t = Utilities::stopTimer(113);
         //                cacheTime += t;
         //                //            cout << "cache time:" << t << endl;
@@ -168,8 +168,8 @@ void TransientStorage::insertPairList(long dataIndex, map<long, pair<prf_type, p
         //file.seekg(pos*KEY_VALUE_SIZE, ios::beg);
         if (Utilities::DROP_CACHE && !setupMode) {
             Utilities::startTimer(113);
-            if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-            if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+            if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+            if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
             auto t = Utilities::stopTimer(113);
             cacheTime += t;
             //            cout << "cache time:" << t << endl;
@@ -206,8 +206,8 @@ void TransientStorage::insertPair(long dataIndex, pair<prf_type, prf_type> ciphe
     long pos = counter; //(unsigned long) (*((long*) hash)) % maxSize;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -231,8 +231,8 @@ void TransientStorage::insertVectorOfPairs(long dataIndex, vector<pair<prf_type,
     long pos = 0; //(unsigned long) (*((long*) hash)) % maxSize;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -264,8 +264,8 @@ void TransientStorage::AddVectorOfPairs(long dataIndex, vector<pair<prf_type, pr
     long pos = counter; //(unsigned long) (*((long*) hash)) % maxSize;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -301,8 +301,8 @@ void TransientStorage::setVectorOfPairs(long dataIndex, long index, vector<pair<
     long pos = index; //(unsigned long) (*((long*) hash)) % maxSize;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -337,8 +337,8 @@ void TransientStorage::setVectorOfEntries(long dataIndex, long index, vector<prf
     long pos = index; //(unsigned long) (*((long*) hash)) % maxSize;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -366,8 +366,8 @@ void TransientStorage::insertVectorOfTriples(long dataIndex, vector<pair<pair<pr
     long pos = 0; //(unsigned long) (*((long*) hash)) % maxSize;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -404,8 +404,8 @@ void TransientStorage::insertPairAndInt(long dataIndex, prf_type p1, prf_type p2
     long pos = counter; //(unsigned long) (*((long*) hash)) % maxSize;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -433,8 +433,8 @@ void TransientStorage::setPair(long dataIndex, long index, pair<prf_type, prf_ty
     long pos = index; //(unsigned long) (*((long*) hash)) % maxSize;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -461,8 +461,8 @@ void TransientStorage::insertTriple(long dataIndex, prf_type p1, prf_type p2, pr
     long pos = counter; //(unsigned long) (*((long*) hash)) % maxSize;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -491,8 +491,8 @@ void TransientStorage::insertTripleAndInt(long dataIndex, prf_type p1, prf_type 
     long pos = counter; //(unsigned long) (*((long*) hash)) % maxSize;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -519,8 +519,8 @@ void TransientStorage::insertEntry(long dataIndex, prf_type cipher) {
     long pos = counter; //(unsigned long) (*((long*) hash)) % maxSize;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -543,8 +543,8 @@ void TransientStorage::insertEntryVector(long dataIndex, vector<prf_type> cipher
     long pos = counter; //(unsigned long) (*((long*) hash)) % maxSize;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -576,8 +576,8 @@ void TransientStorage::insertPairVector(long dataIndex, vector<pair<prf_type, pr
     long pos = counter; //(unsigned long) (*((long*) hash)) % maxSize;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -614,8 +614,8 @@ void TransientStorage::setEntry(long dataIndex, long index, prf_type cipher) {
     long pos = index; //(unsigned long) (*((long*) hash)) % maxSize;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -642,8 +642,8 @@ vector<pair<prf_type, prf_type>> TransientStorage::getAllPairs(long dataIndex) {
     long size = counter;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -680,8 +680,8 @@ vector<pair<pair<prf_type, prf_type>, prf_type> > TransientStorage::getAllTriple
     long size = counter;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -722,8 +722,8 @@ vector<prf_type> TransientStorage::getAllData(long dataIndex) {
     long size = counter;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -769,8 +769,8 @@ vector<prf_type> TransientStorage::getEntriesPartially(long dataIndex, int begin
     }
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -816,8 +816,8 @@ vector<pair<prf_type, prf_type> > TransientStorage::getPairsPartially(long dataI
     }
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -873,8 +873,8 @@ void TransientStorage::clear(long index) {
         //        fflush(file);
         //        if (Utilities::DROP_CACHE && !setupMode) {
         //            Utilities::startTimer(113);
-        //            if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        //            if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        //            if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        //            if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         //            auto t = Utilities::stopTimer(113);
         //            cacheTime += t;
         //            //            cout << "cache time:" << t << endl;
@@ -911,8 +911,8 @@ pair<prf_type, prf_type> TransientStorage::getPair(long dataIndex, long index) {
     long pos = index;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -951,8 +951,8 @@ vector<pair<prf_type, prf_type> > TransientStorage::getPairVector(long dataIndex
     long pos = begin;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -993,8 +993,8 @@ void TransientStorage::getTriple(long dataIndex, long index, prf_type& p1, prf_t
     long pos = index;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -1029,8 +1029,8 @@ void TransientStorage::getPairAndInt(long dataIndex, long index, prf_type& p1, p
     long pos = index;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -1065,8 +1065,8 @@ void TransientStorage::getTripleAndInt(long dataIndex, long index, prf_type& p1,
     long pos = index;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -1103,8 +1103,8 @@ prf_type TransientStorage::getEntry(long dataIndex, long index) {
     long pos = index;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -1134,8 +1134,8 @@ vector<prf_type> TransientStorage::getEntryVector(long dataIndex, long begin, lo
         cerr << "Error in read: " << strerror(errno);
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -1173,8 +1173,8 @@ char* TransientStorage::readRawData(long dataIndex, long begin, long count) {
     long pos = begin;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -1199,8 +1199,8 @@ void TransientStorage::writeRawData(long dataIndex, char* data, long count) {
     long pos = counter; //(unsigned long) (*((long*) hash)) % maxSize;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -1224,8 +1224,8 @@ void TransientStorage::writeRawDataFrom(long dataIndex, long begin, char* data, 
     long pos = begin; //(unsigned long) (*((long*) hash)) % maxSize;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }
@@ -1250,8 +1250,8 @@ void TransientStorage::insertIntAtTheEnd(long dataIndex, int p, unsigned int p3)
     long pos = p; //(unsigned long) (*((long*) hash)) % maxSize;
     if (Utilities::DROP_CACHE && !setupMode) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda >/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null 2>&1");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
         auto t = Utilities::stopTimer(113);
         cacheTime += t;
     }

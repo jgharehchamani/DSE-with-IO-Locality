@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=DSE-with-IO-Locality
+PROJECTNAME=io-dse
 
 # Active Configuration
 DEFAULTCONF=Debug

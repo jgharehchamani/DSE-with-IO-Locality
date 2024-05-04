@@ -267,9 +267,9 @@ void AVLTree::setupInsert(Bid& rootKey, int& rootPos, map<Bid, string> pairs) {
             setupNodes.push_back(node);
         }
     }
-    cout << "Creating BST" << endl;
+//    cout << "Creating BST" << endl;
     sortedArrayToBST(0, setupNodes.size() - 1, rootPos, rootKey);
-    cout << "Inserting in ORAM" << endl;
+//    cout << "Inserting in ORAM" << endl;
     oram->setupInsert(setupNodes);
 }
 

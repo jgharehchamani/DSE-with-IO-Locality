@@ -6,8 +6,7 @@ NlogNClient::~NlogNClient() {
     delete server;
 }
 
-NlogNClient::NlogNClient(long numOfDataSets, bool inMemory, bool overwrite, bool profile) {
-    cout << "================= RUNNING SDa + NlogN )(long) ==================" << endl;
+NlogNClient::NlogNClient(long numOfDataSets, bool inMemory, bool overwrite, bool profile) {    
     this->profile = profile;
     server = new NlogNServer(numOfDataSets, inMemory, overwrite, profile, "");
     memset(nullKey.data(), 0, AES_KEY_SIZE);
@@ -67,10 +66,6 @@ void NlogNClient::setup2(long index, unordered_map<string, vector<tmp_prf_type> 
 
 
         string keyword = item.first;
-
-        if (keyword == "ZYXO$o*") {
-            cout << "level:" << index << " size:" << curSize << endl;
-        }
 
         prf_type K = Utilities::encode(item.first, key);
         unsigned char cntstr[AES_KEY_SIZE];
@@ -359,8 +354,8 @@ int NlogNClient::getCorrespondingLevel(int index, int size) {
     int maxCapacity = pow(2, index);
     int innerLevels = index + 1;
     int storeLevel = floor(log2(size));
-    int res = storeLevel - (storeLevel % JUMP_SIZE);
-    int maxLevelIndex = JUMP_SIZE * (MAX_LEVEL - 1);
+    int res = storeLevel - (storeLevel % Utilities::JUMP_SIZE);
+    int maxLevelIndex = Utilities::JUMP_SIZE * (MAX_LEVEL - 1);
     if (res > maxLevelIndex) {
         return maxLevelIndex;
     }
@@ -378,7 +373,6 @@ vector<prf_type> NlogNClient::search(long index, string keyword, unsigned char* 
     Utilities::startTimer(131);
     long keywordCnt = server->getCounter(index, token);
     auto t3 = Utilities::stopTimer(131);
-    cout << "index:" << index << " getCounter=" << keywordCnt << " time taken (for NlogN):" << t3 << endl;
     server->keywordCounters->getCounterTime = t3;
     vector<prf_type> finalRes;
     long attempt = 0;
@@ -408,11 +402,6 @@ vector<prf_type> NlogNClient::search(long index, string keyword, unsigned char* 
     }
     auto aa = Utilities::stopTimer(77);
     searchTime += aa;
-    cout << "level time:" << aa << endl;
-    cout << "level cache time:" << server->storage->cacheTime + server->keywordCounters->cacheTime << endl;
-    cout << "level pure time:" << aa - (server->storage->cacheTime + server->keywordCounters->cacheTime) << endl;
-
-
     TotalCacheTime += server->keywordCounters->cacheTime;
     TotalCacheTime += server->storage->cacheTime;
     //if(finalRes.size()>0)

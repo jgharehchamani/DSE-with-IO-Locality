@@ -8,17 +8,17 @@
 
 #define USE_XXL 0
 //#define DROP_CACHE  0
-#define HDD_CACHE  1
-#define KERNEL_CACHE  1
+//#define HDD_CACHE  1
+//#define KERNEL_CACHE  1
 
 #define ID_SIZE 16
 #define SPACE_OVERHEAD 4
 #define LOCALITY 1
 #define INF 9999999
-#define JUMP_SIZE 1
+//#define JUMP_SIZE 1
 #define MAX_LEVEL 100
 
-#define CACHE_PERCENTAGE    0
+//#define CACHE_PERCENTAGE    0
 
 
 using byte_t = uint8_t;

@@ -88,17 +88,12 @@ vector<prf_type> AmortizedBASClient::search(int index, string keyword, unsigned 
 
         finalRes.push_back(plaintext);
     }
-    printf("found %d items\n", finalRes.size());
     if (profile) {
-        searchDecryption = Utilities::stopTimer(65);
-        printf("search decryption time:%f for decrypting %d ciphers\n", searchDecryption, ciphers.size());
+        searchDecryption = Utilities::stopTimer(65);        
     }
     totalCommunication += ciphers.size() * sizeof (prf_type) + sizeof (prf_type);
     TotalCacheTime += server->storage->cacheTime;
     auto aa = Utilities::stopTimer(77);
-    cout << "level time:" << aa << endl;
-    cout << "level cache time:" << server->storage->cacheTime << endl;
-    cout << "level pure time:" << aa - (server->storage->cacheTime) << endl;
     searchTime += aa; //Utilities::stopTimer(77);
 
     return finalRes;

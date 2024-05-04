@@ -6,7 +6,7 @@
 #include <vector>
 using namespace std;
 
-DeAmortizedSDdBAS::DeAmortizedSDdBAS(bool deleteFiles, int keyworsSize, int N, bool inMemory, bool overwrite) {
+DeAmortizedSDdBAS::DeAmortizedSDdBAS(bool deleteFiles, int keyworsSize, int N, bool inMemory, bool overwrite) : DSEScheme(){
     this->deleteFiles = deleteFiles;
     this->overwrite = overwrite;
     l = ceil(log2(N));
@@ -113,6 +113,7 @@ void DeAmortizedSDdBAS::update(OP op, string keyword, int ind, bool setup) {
         return;
     }
     if (!setup) {
+        Utilities::startTimer(77);
         for (int i = 0; i < l; i++) {
             omaps[i]->treeHandler->oram->totalRead = 0;
             omaps[i]->treeHandler->oram->totalWrite = 0;
@@ -268,6 +269,7 @@ void DeAmortizedSDdBAS::update(OP op, string keyword, int ind, bool setup) {
         dumpStatus();
     }
     if (!setup) {
+        auto updateT = Utilities::stopTimer(77);
         for (int i = 0; i < l; i++) {
             totalUpdateCommSize += (omaps[i]->treeHandler->oram->totalRead + omaps[i]->treeHandler->oram->totalWrite)*(sizeof (prf_type) + sizeof (int));
         }
@@ -279,6 +281,7 @@ void DeAmortizedSDdBAS::update(OP op, string keyword, int ind, bool setup) {
         for (int i = 0; i < l; i++) {
             totalCacheTime += omaps[i]->treeHandler->oram->store->cacheTime;
         }
+        totalUpdateTime = updateT-totalCacheTime;
     }
 }
 
@@ -315,7 +318,7 @@ vector<int> DeAmortizedSDdBAS::search(string keyword) {
         }
     }
     auto searchTime1 = Utilities::stopTimer(77);
-    cout << "Total Amortized1 Search time:" << searchTime1 << endl;
+//    cout << "Total Amortized1 Search time:" << searchTime1 << endl;
     Utilities::startTimer(99);
     for (int j = 0; j < 3; j++) {
         for (int i = localSize; i < l; i++) {
@@ -349,11 +352,12 @@ vector<int> DeAmortizedSDdBAS::search(string keyword) {
         totalCacheTime += omaps[i]->treeHandler->oram->store->cacheTime;
     }
     auto filterationTime = Utilities::stopTimer(99);
-    printf("filteration time:%f\n", filterationTime);
+//    printf("filteration time:%f\n", filterationTime);
 
-    cout << "Total Amortized1 Search time:" << searchTime1 << endl;
-    cout << "Total drop cache command time for Storage:[" << totalCacheTime << "]" << endl;
-    cout << "Amort search time - cache drop time =[" << searchTime1 + filterationTime - totalCacheTime << "]" << endl;
+//    cout << "Total Amortized1 Search time:" << searchTime1 << endl;
+//    cout << "Total drop cache command time for Storage:[" << totalCacheTime << "]" << endl;
+//    cout << "Amort search time - cache drop time =[" << searchTime1 + filterationTime - totalCacheTime << "]" << endl;
+    totalSearchTime = searchTime1 + filterationTime - totalCacheTime;
 
     return finalRes;
 }

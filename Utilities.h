@@ -129,8 +129,16 @@ public:
     static unsigned char key[AES_KEY_SIZE], iv[AES_KEY_SIZE];
     static std::string testKeyword;
     static std::string rootAddress;
+    static int JUMP_SIZE;
+    static int CACHE_PERCENTAGE;
+    static bool HDD_CACHE;
+    static bool KERNEL_CACHE;
+    static bool SSD_CACHE;
     static int numOfFile;
     static int TotalCacheSize;
+    static std::string HDD_DROP_CACHE_COMMAND;
+    static std::string SSD_DROP_CACHE_COMMAND;
+    static std::string KERNEL_DROP_CACHE_COMMAND;
     static int decrypt(unsigned char *ciphertext, int ciphertext_len, unsigned char *key, unsigned char *iv, unsigned char *plaintext);
     static int encrypt(unsigned char *plaintext, int plaintext_len, unsigned char *key, unsigned char *iv, unsigned char *ciphertext);
     static void handleErrors(void);
@@ -405,7 +413,7 @@ public:
     }
 
     template <typename T>
-    static void readConfigFile(int argc, char** argv, std::string address, std::vector<TC<T> >& testCases, bool& inMemory, bool& overwrite) {
+    static void readConfigFile(int argc, char** argv, std::string address, std::vector<TC<T> >& testCases) {
         /*
          * Config file structure (They should be sorted based on N)
          * 
@@ -430,31 +438,20 @@ public:
         //            testCases.push_back(testCase);
         //        } else {
         infile.open(address);
+        TC<T> testCase;
         getline(infile, tmp);
-        inMemory = (tmp == "true") ? true : false;
+        testCase.N = stoi(tmp);
         getline(infile, tmp);
-        overwrite = (tmp == "true") ? true : false;
-        std::cout << "overWrite:" << overwrite << std::endl;
+        testCase.K = stoi(tmp);
         getline(infile, tmp);
-        int totalTests = stoi(tmp);
-        for (int i = 0; i < totalTests; i++) {
-            TC<T> testCase;
+        int qNum = stoi(tmp);
+        for (int i = 0; i < qNum; i++) {
             getline(infile, tmp);
-            testCase.N = stoi(tmp);
-            getline(infile, tmp);
-            testCase.K = stoi(tmp);
-            getline(infile, tmp);
-            int qNum = stoi(tmp);
-            for (int i = 0; i < qNum; i++) {
-                getline(infile, tmp);
-                testCase.Qs.push_back(stoi(tmp));
-                getline(infile, tmp);
-                testCase.delNumber.push_back(stoi(tmp));
-            }
-            testCases.push_back(testCase);
+            testCase.Qs.push_back(stoi(tmp));
+            testCase.delNumber.push_back(0);
         }
+        testCases.push_back(testCase);
         infile.close();
-        //        }
     };
 
     template <typename T>

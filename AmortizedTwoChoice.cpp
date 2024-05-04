@@ -6,17 +6,8 @@
 
 using namespace std;
 
-AmortizedTwoChoice::AmortizedTwoChoice(int N, bool inMemory, bool overwrite) {
-    cout << "AmortizedTwoChoice" << endl;
-    //    L = new AmortizedTwoChoiceBASClient(ceil(log2(N)), inMemory, overwrite, profile);
-    //    L = new OneChoiceClient(ceil(log2(N)), inMemory, overwrite, profile);
-    //    L = new TwoChoicePPwithStashClient(ceil(log2(N)), inMemory, overwrite, profile);
+AmortizedTwoChoice::AmortizedTwoChoice(int N, bool inMemory, bool overwrite): DSEScheme() {
     L = new TwoChoiceWithOneChoiceClient(floor(log2(N)) + 1, inMemory, overwrite, profile);
-    //    L = new TwoChoiceWithTunableLocalityClient(ceil(log2(N)), inMemory, overwrite, profile);
-    //    L = new TwoChoicePPWithTunableLocalityClient(ceil(log2(N)), inMemory, overwrite, profile);
-    //	  L = new NlogNClient(ceil(log2(N)), inMemory, overwrite, profile);
-    //    L = new NlogNWithOptimalLocalityClient(ceil(log2(N)), inMemory, overwrite, profile);
-    //    L = new NlogNWithTunableLocalityClient(ceil(log2(N)), inMemory, overwrite, profile);
 
     for (int i = 0; i < ceil(log2(N)); i++) {
         keys.push_back(NULL);
@@ -140,10 +131,12 @@ void AmortizedTwoChoice::update(OP op, string keyword, int ind, bool setup) {
     }
     if (!setup) {
         auto updateTime = Utilities::stopTimer(33);
-        cout << "Total drop cache command time for Storage:[" << L->oneChoiceServer->storage->cacheTime +
-                L->twoChoiceServer->keywordCounters->cacheTime + L->twoChoiceServer->storage->cacheTime << "]" << endl;
-        cout << "Update time - cache drop time =[" << updateTime - (L->oneChoiceServer->storage->cacheTime +
-                L->twoChoiceServer->keywordCounters->cacheTime + L->twoChoiceServer->storage->cacheTime) << "]" << endl;
+//        cout << "Total drop cache command time for Storage:[" << L->oneChoiceServer->storage->cacheTime +
+//                L->twoChoiceServer->keywordCounters->cacheTime + L->twoChoiceServer->storage->cacheTime << "]" << endl;
+//        cout << "Update time - cache drop time =[" << updateTime - (L->oneChoiceServer->storage->cacheTime +
+//                L->twoChoiceServer->keywordCounters->cacheTime + L->twoChoiceServer->storage->cacheTime) << "]" << endl;
+        totalUpdateTime = updateTime - (L->oneChoiceServer->storage->cacheTime +
+                L->twoChoiceServer->keywordCounters->cacheTime + L->twoChoiceServer->storage->cacheTime);
     }
 }
 
@@ -187,13 +180,14 @@ vector<int> AmortizedTwoChoice::search(string keyword) {
         }
     }
     filterationTime = Utilities::stopTimer(99);
-    cout << endl << endl << "TOTAL search BYTES read:{" << L->totalCommunication << "}" << endl;
-    cout << "TOTAL search TIME:[[" << L->searchTime << "]]" << endl;
-    printf("filteration time:%f\n", filterationTime);
+//    cout << endl << endl << "TOTAL search BYTES read:{" << L->totalCommunication << "}" << endl;
+//    cout << "TOTAL search TIME:[[" << L->searchTime << "]]" << endl;
+//    printf("filteration time:%f\n", filterationTime);
 
-    cout << "Total AmortizedTwoChoice Search time:" << searchTime << "/" << L->searchTime << endl;
-    cout << "Total drop cache command time for Storage:[" << L->TotalCacheTime << "]" << endl;
-    cout << "Amort search time - cache drop time =[" << searchTime + filterationTime - L->TotalCacheTime << "]" << endl;
+//    cout << "Total AmortizedTwoChoice Search time:" << searchTime << "/" << L->searchTime << endl;
+//    cout << "Total drop cache command time for Storage:[" << L->TotalCacheTime << "]" << endl;
+//    cout << "Amort search time - cache drop time =[" << searchTime + filterationTime - L->TotalCacheTime << "]" << endl;
+    totalSearchTime = searchTime + filterationTime - L->TotalCacheTime;
     //totalSearchCommSize += L->totalCommunication;
     //cout <<"-----------------------------------------------------------"<<endl;
     return finalRes;
@@ -232,7 +226,7 @@ void AmortizedTwoChoice::endSetup() {
     if (setup) {
         for (int i = 0; i < tmpLocalSize; i++) {
             if (setupData[i].size() > 0) {
-                cout << "END SETUP:" << i << endl;
+//                cout << "END SETUP:" << i << endl;
                 unsigned char* newKey = new unsigned char[AES_KEY_SIZE];
                 memset(newKey, 0, AES_KEY_SIZE);
                 L->setup2(i, setupData[i], newKey);
@@ -241,7 +235,7 @@ void AmortizedTwoChoice::endSetup() {
     }
     setup = false;
     L->endSetup();
-    cout << "done" << endl;
+//    cout << "done" << endl;
     fstream file(Utilities::rootAddress + "existStatus.txt", std::ofstream::out);
     if (file.fail()) {
         cerr << "Error: " << strerror(errno);

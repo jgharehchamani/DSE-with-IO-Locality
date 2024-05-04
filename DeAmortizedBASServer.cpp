@@ -52,9 +52,9 @@ vector<prf_type> DeAmortizedBASServer::search(int instance, int dataIndex, prf_t
     double serverSearchTime = 0;
     int cnt = 1;
     do {
-        if (cnt % 100 == 0) {
-            cout << "searching for:" << cnt << endl;
-        }
+//        if (cnt % 100 == 0) {
+//            cout << "searching for:" << cnt << endl;
+//        }
         prf_type curToken = token, mapKey;
         unsigned char cntstr[AES_KEY_SIZE];
         memset(cntstr, 0, AES_KEY_SIZE);
@@ -71,7 +71,7 @@ vector<prf_type> DeAmortizedBASServer::search(int instance, int dataIndex, prf_t
             }
             if (found) {
                 results.push_back(res);
-                cout << "instance:" << instance << " level:" << dataIndex << endl;
+//                cout << "instance:" << instance << " level:" << dataIndex << endl;
                 exist = true;
                 cnt++;
             } else {
@@ -185,7 +185,7 @@ void DeAmortizedBASServer::endSetup(bool overwrite) {
     if (overwrite) {
         for (int j = 0; j < 4; j++) {
             for (int i = 0; i < data[j].size(); i++) {
-                cout << "inserting instance:" << j << "/4 index:" << i << "/" << data[j].size() << endl;
+//                cout << "inserting instance:" << j << "/4 index:" << i << "/" << data[j].size() << endl;
                 map<prf_type, prf_type> ciphers;
                 ciphers.insert(data[j][i]->setData.begin(), data[j][i]->setData.end());
                 storage[j]->insert(i, ciphers, true);

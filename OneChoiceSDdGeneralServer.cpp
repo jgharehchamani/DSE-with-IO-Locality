@@ -195,7 +195,7 @@ vector<prf_type> OneChoiceSDdGeneralServer::search(long instance, long dataIndex
     prf_type res;
     if (profile && storeKWCounter) {
         keywordCounterTime = Utilities::stopTimer(35);
-        cout << "[[" << keywordCounterTime << "]]" << endl;
+//        cout << "[[" << keywordCounterTime << "]]" << endl;
         //printf("keyword counter Search Time:%f number of SeekG:%d number of read bytes:%d\n", keywordCounterTime, keywordCounters->seekgCount, keywordCounters->KEY_VALUE_SIZE * keywordCounters->seekgCount);
     }
     serverSearchTime = Utilities::stopTimer(43);
@@ -1580,7 +1580,7 @@ void OneChoiceSDdGeneralServer::endSetup(bool overwrite) {
     if (overwrite) {
         for (int j = 0; j < 4; j++) {
             for (int i = 0; i < keywordData[j].size(); i++) {
-                cout << "inserting keyword instance:" << j << "/4 index:" << i << "/" << data[j].size() << endl;
+//                cout << "inserting keyword instance:" << j << "/4 index:" << i << "/" << data[j].size() << endl;
                 //            map<prf_type, prf_type> ciphers;
                 //            ciphers.insert(keywordData[j][i]->setData.begin(), keywordData[j][i]->setData.end());
                 keywordCounters[j]->insert(i, *keywordData[j][i]->setData, true, true);
@@ -1588,7 +1588,7 @@ void OneChoiceSDdGeneralServer::endSetup(bool overwrite) {
         }
         for (int j = 0; j < 4; j++) {
             for (int i = 0; i < data[j].size(); i++) {
-                cout << "inserting instance:" << j << "/4 index:" << i << "/" << data[j].size() << endl;
+//                cout << "inserting instance:" << j << "/4 index:" << i << "/" << data[j].size() << endl;
                 //                vector<vector<prf_type> >* ciphers = new vector<vector<prf_type> >();
                 //                (*ciphers).insert((*ciphers).end(), (*data[j][i]).begin(), (*data[j][i]).end());
                 //                storage[j]->insertAll(i, (*ciphers), false, true);
@@ -1614,11 +1614,11 @@ void OneChoiceSDdGeneralServer::endSetup(bool overwrite) {
     //#########################################################
     //   For UPDATE should be Uncommented
     //#########################################################
-        cout << "TransData Setup begin" << endl;
+//        cout << "TransData Setup begin" << endl;
         transData.endSetup();
-        cout << "TransData Setup done" << endl;
+//        cout << "TransData Setup done" << endl;
         for (int j = 0; j < dataIndex; j++) {
-            cout << j << "/" << dataIndex << endl;
+//            cout << j << "/" << dataIndex << endl;
             updateData[j].endSetup();
         }
     //#########################################################

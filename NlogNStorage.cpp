@@ -11,7 +11,7 @@ NlogNStorage::NlogNStorage(bool inMemory, long dataIndex, string fileAddressPref
 
 bool NlogNStorage::isInCache(long index, long instance, long pos) {
     long levelSize = 2 * pow(2, index);
-    long threshold = floor(levelSize * CACHE_PERCENTAGE);
+    long threshold = floor(levelSize * Utilities::CACHE_PERCENTAGE);
     if (pos < threshold) {
         return true;
     } else {
@@ -41,8 +41,7 @@ bool NlogNStorage::setup(bool overwrite) {
                 long alloc_size = AES_KEY_SIZE*maxSize;
                 while (alloc_size > 0) {
                     long bs = min(alloc_size, 2147483648);
-                    string command = string("dd if=/dev/zero bs=" + to_string(bs) + " count=1 >> " + filename);
-                    cout << "command:" << command << endl;
+                    string command = string("dd if=/dev/zero bs=" + to_string(bs) + " count=1 status=none >> " + filename);
                     system(command.c_str());
                     alloc_size -= bs;
                 }
@@ -151,9 +150,8 @@ vector<prf_type> NlogNStorage::getAllData(long index, long instance) {
 
     if (Utilities::DROP_CACHE) {
         Utilities::startTimer(113);
-        if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda>/dev/null 2>&1");
-        if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches>/dev/null 2>&1");
-        //if(KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches");
+        if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+        if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());        
         auto t = Utilities::stopTimer(113);
         //printf("drop cache time:%f\n", t);
         cacheTime += t;
@@ -187,9 +185,9 @@ vector<prf_type> NlogNStorage::getAllData(long index) {
         long size = ftell(fp);
         if (Utilities::DROP_CACHE) {
             Utilities::startTimer(113);
-            if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda>/dev/null 2>&1");
-            if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches>/dev/null 2>&1");
-            //     if(KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches");
+            if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+            if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());
+            //     if(Utilities::KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches");
             auto t = Utilities::stopTimer(113);
             //printf("drop cache time:%f\n", t);
             cacheTime += t;
@@ -270,9 +268,8 @@ vector<prf_type> NlogNStorage::find(long index, long instance, long targetPos) {
     if (cnt > 0) {
         if (Utilities::DROP_CACHE) {
             Utilities::startTimer(113);
-            if (HDD_CACHE)system("sudo hdparm -A 0 /dev/sda>/dev/null 2>&1");
-            if (KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches>/dev/null 2>&1");
-            //if(KERNEL_CACHE)system("echo 3 | sudo tee /proc/sys/vm/drop_caches");
+            if (Utilities::HDD_CACHE)system(Utilities::HDD_DROP_CACHE_COMMAND.c_str()); if (Utilities::SSD_CACHE)system(Utilities::SSD_DROP_CACHE_COMMAND.c_str());
+            if (Utilities::KERNEL_CACHE)system(Utilities::KERNEL_DROP_CACHE_COMMAND.c_str());            
             auto t = Utilities::stopTimer(113);
             cacheTime += t;
         }
@@ -296,12 +293,12 @@ vector<prf_type> NlogNStorage::find(long index, long instance, long targetPos) {
 }
 
 void NlogNStorage::loadCache() {
-    if (CACHE_PERCENTAGE == 0) {
+    if (Utilities::CACHE_PERCENTAGE == 0) {
         return;
     }
     for (long index = 0; index < dataIndex; index++) {
         long levelSize = 2 * pow(2, index);
-        long size = floor(levelSize * CACHE_PERCENTAGE);
+        long size = floor(levelSize * Utilities::CACHE_PERCENTAGE);
         for (long j = 0; j < index + 1; j++) {
             FILE* file = filehandles[index][j];
             if (file == NULL) {

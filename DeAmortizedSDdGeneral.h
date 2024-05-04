@@ -12,10 +12,11 @@
 #include "AES.hpp"
 #include "OneChoiceSDdGeneralClient.h"
 #include "OMAP.h"
+#include "DSEScheme.h"
 
 using namespace std;
 
-class DeAmortizedSDdGeneral {
+class DeAmortizedSDdGeneral : public DSEScheme{
 public:
     inline prf_type bitwiseXOR(int input1, int op, prf_type input2);
     inline prf_type bitwiseXOR(prf_type input1, prf_type input2);

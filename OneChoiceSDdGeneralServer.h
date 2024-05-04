@@ -145,74 +145,74 @@ public:
 
     void endSetup() {
         useDisk = true;
-        cout << "inserting leftArray" << endl;
+//        cout << "inserting leftArray" << endl;
         for (int j = 0; j < leftArray.size(); j++) {
             leftArraydisk->insertEntry(numOfIndices - 1, leftArray[j]);
         }
-        cout << "inserting leftArray3" << endl;
+//        cout << "inserting leftArray3" << endl;
         for (int j = 0; j < leftArray3.size(); j++) {
             leftArray3disk->insertPair(numOfIndices - 1, leftArray3[j]);
         }
-        cout << "inserting rightArray" << endl;
+//        cout << "inserting rightArray" << endl;
         for (int j = 0; j < rightArray.size(); j++) {
             rightArraydisk->insertEntry(numOfIndices - 1, rightArray[j]);
         }
 
-        cout << "inserting rightArray3" << endl;
+//        cout << "inserting rightArray3" << endl;
         for (int j = 0; j < rightArray3.size(); j++) {
             rightArray3disk->insertPair(numOfIndices - 1, rightArray3[j]);
         }
 
-        cout << "inserting inputArray" << endl;
+//        cout << "inserting inputArray" << endl;
         for (int j = 0; j < inputArray.size(); j++) {
             inputArraydisk->insertEntry(numOfIndices - 1, inputArray[j]);
         }
-        cout << "inserting inputArray2" << endl;
+//        cout << "inserting inputArray2" << endl;
         for (int j = 0; j < inputArray2.size(); j++) {
             inputArray2disk->insertPair(numOfIndices - 1, inputArray2[j]);
         }
-        cout << "inserting randomLabels" << endl;
+//        cout << "inserting randomLabels" << endl;
         for (int j = 0; j < randomLabels.size(); j++) {
             randomLabelsdisk->insertEntry(numOfIndices - 1, randomLabels[j]);
         }
-        cout << "inserting randomLabels2" << endl;
+//        cout << "inserting randomLabels2" << endl;
         for (int j = 0; j < randomLabels2.size(); j++) {
             randomLabels2disk->insertEntry(numOfIndices - 1, randomLabels2[j]);
         }
-        cout << "inserting inputAssignedBuckets" << endl;
+//        cout << "inserting inputAssignedBuckets" << endl;
         for (int j = 0; j < inputAssignedBuckets.size(); j++) {
             inputAssignedBucketsdisk->insertPair(numOfIndices - 1, inputAssignedBuckets[j]);
         }
-        cout << "inserting inputAssignedBuckets2" << endl;
+//        cout << "inserting inputAssignedBuckets2" << endl;
         for (int j = 0; j < inputAssignedBuckets2.size(); j++) {
             inputAssignedBuckets2disk->insertTriple(numOfIndices - 1, inputAssignedBuckets2[j].first.first, inputAssignedBuckets2[j].first.second, inputAssignedBuckets2[j].second);
         }
-        cout << "inserting permutedArrayWithNoDummy" << endl;
+//        cout << "inserting permutedArrayWithNoDummy" << endl;
         for (int j = 0; j < permutedArrayWithNoDummy.size(); j++) {
             permutedArrayWithNoDummydisk->insertEntry(numOfIndices - 1, permutedArrayWithNoDummy[j]);
         }
-        cout << "inserting permutedArrayWithNoDummy2" << endl;
+//        cout << "inserting permutedArrayWithNoDummy2" << endl;
         for (int j = 0; j < permutedArrayWithNoDummy2.size(); j++) {
             permutedArrayWithNoDummy2disk->insertPair(numOfIndices - 1, permutedArrayWithNoDummy2[j]);
         }
-        cout << "inserting sortedKeywords" << endl;
+//        cout << "inserting sortedKeywords" << endl;
         for (int j = 0; j < sortedKeywords.size(); j++) {
             sortedKeywordsdisk->insertEntry(numOfIndices - 1, sortedKeywords[j]);
         }
-        cout << "inserting sortedBUF1" << endl;
+//        cout << "inserting sortedBUF1" << endl;
         for (int j = 0; j < sortedBUF1.size(); j++) {
             sortedBUF1disk->insertPair(numOfIndices - 1, sortedBUF1[j]);
         }
-        cout << "inserting sortedBUF2" << endl;
+//        cout << "inserting sortedBUF2" << endl;
         for (int j = 0; j < sortedBUF2.size(); j++) {
             sortedBUF2disk->insertPair(numOfIndices - 1, sortedBUF2[j]);
         }
-        cout << "inserting kwCountersdisk" << endl;
+//        cout << "inserting kwCountersdisk" << endl;
         for (auto item : (*kwCounters)) {
             kwCountersdisk->insert(item.first, item.second);
         }
 
-        cout << "inserting arrayAs" << endl;
+//        cout << "inserting arrayAs" << endl;
         for (int i = 0; i < arrayAs.size(); i++) {
             for (int j = 0; j < arrayAs[i].size(); j++) {
                 for (int k = 0; k < arrayAs[i][j].size(); k++) {
@@ -221,7 +221,7 @@ public:
             }
         }
 
-        cout << "inserting arrayAs2" << endl;
+//        cout << "inserting arrayAs2" << endl;
         for (int i = 0; i < arrayAs2.size(); i++) {
             for (int j = 0; j < arrayAs2[i].size(); j++) {
                 for (int k = 0; k < arrayAs2[i][j].size(); k++) {
@@ -230,7 +230,7 @@ public:
             }
         }
 
-        cout << "inserting ciphertexts" << endl;
+//        cout << "inserting ciphertexts" << endl;
         for (int i = 0; i < (*ciphertexts).size(); i++) {
             for (int j = 0; j < (*ciphertexts)[i].size(); j++) {
                 ciphertextsdisk[i]->insertEntry(numOfIndices - 1, (*ciphertexts)[i][j]);
