@@ -1,5 +1,5 @@
 # DSE-with-IO-Locality
-This repository contains several amortized/de-amortized DSE schemes with IO locality. The open-source is based on our following paper:
+This repository contains several amortized/de-amortized DSE schemes with I/O locality. The open-source code is based on our following paper:
 
 Priyanka Mondal, Javad Ghareh Chamani, Ioannis Demertzis, Dimitrios Papadopoulos. "I/O-Efficient Dynamic Searchable Encryption meets Forward & Backward Privacy", USENIX Security 2024
 
@@ -16,90 +16,105 @@ To build schemes, execute
     make clean
     make
 
-This will produce an executable file named io-dse in ./dist/Debug/GNU-Linux/ folder. 
+This produces an executable file named io-dse in ./dist/Debug/GNU-Linux/ folder. 
 
     ./dist/Debug/GNU-Linux/io-dse
 
 ### Structure of Files: ###
 
-Each scheme consist of at least 4 separete classes: Controller, Client, Server, and Storage. These classes handle the schemes procedures accordingly. Controller provides DSE scheme interface (setup, search, and update) while Client and Server implements the logic of the scheme. Storage is responsible for managing disk accesses and all caching related procedures.
-For example, the files corresponding to SDa[PiBAS] are as follows:
-Controller: AmortizedPiBAS
-Client: AmortizedBASClient
-Server: AmortizedBASServer
-Storage: Storage
+Each scheme consists of at least four separate classes: Controller, Client, Server, and Storage. These classes handle the procedures of the schemes accordingly. The Controller provides the DSE scheme interface (setup, search, and update), while the Client and Server implement the logic of the scheme. The Storage class is responsible for managing disk accesses and all caching-related procedures.
 
-Note that some schemes use multiple classes from different schemes. E.g., in SDa[2C], there is one controller (AmortizedTwoChoice), one client (TwoChoiceWithOneChoiceClient), two servers (OneChoiceServer, TwoChoiceWithOneChoiceServer) and three storages (Storage, OneChoiceStorage, and TwoChoiceWithOneChoiceStorage)
+For example, the files corresponding to SDa[PiBAS] are as follows:
+
+    Controller: AmortizedPiBAS
+    Client: AmortizedBASClient
+    Server: AmortizedBASServer
+    Storage: Storage
+
+Please note that some schemes use multiple classes from different schemes. For instance, in SDa[2C], there is one controller (AmortizedTwoChoice), one client (TwoChoiceWithOneChoiceClient), two servers (OneChoiceServer, TwoChoiceWithOneChoiceServer), and three storages (Storage, OneChoiceStorage, and TwoChoiceWithOneChoiceStorage).
 
 ### Execution: ###
-The execution of ./dist/Debug/GNU-Linux/io-dse shows its needed arguments as follow:
-        
-Usage: io-dse SCHEME_NAME HARDWARE CACHE_SIZE
+The execution of ./dist/Debug/GNU-Linux/io-dse shows its needed arguments as follow:  
+          
 
-SCHEME_NAME:
-Amortized Schemes: SDa[PiBAS] / SDa[1C] / SDa[2C] / SDa[NlogN] / SDa[3N] / SDa[6N]
-DeAmortized Schemes: SDd[PiBAS] / L-SDd[1C] / L-SDd[NlogN] / L-SDd[3N] / L-SDd[6N]
+    Usage: io-dse SCHEME_NAME HARDWARE CACHE_SIZE  
+  
 
-HARDWARE: HDD, SSD, Memory        
+    SCHEME_NAME:  
 
-CACHE_SIZE (in percentage): integer between 0 and 100   
+    Amortized Schemes: SDa[PiBAS] / SDa[1C] / SDa[2C] / SDa[NlogN] / SDa[3N] / SDa[6N]  
 
-The first argument SCHEME_NAME determines the target scheme which can be any of the amoritzed and de-amortized mentioned schemes. The second argument denotes the disk/memory configuration. Finally, CACHE_SIZE which is a number between 0 and 100 determines the amount of allowed cache in the execution.
-By providing the above arguemnts, the program reads config.txt file and sets up a dataset according to the configurations mentioned in the file. Then, it and executes some searches based on the settings mentioned in the file and runs a single update operation (for all schemes except L-SDd[NlogN], L-SDd[3N], L-SDd[6N] only when the cache size is 0) and measures their exeuction time.
-All parameters used in the paper can be set using the above arguments and the settings provided in the config file. However, for changing the block size, you need to change AES_KEY_SIZE in the types.hpp file and recompile the code.
+    DeAmortized Schemes: SDd[PiBAS] / L-SDd[1C] / L-SDd[NlogN] / L-SDd[3N] / L-SDd[6N]  
+  
+
+    HARDWARE: HDD, SSD, Memory          
+
+
+    CACHE_SIZE (in percentage): integer between 0 and 100     
+  
+The first argument, SCHEME_NAME, determines the target scheme, which can be any of the amortized and de-amortized schemes mentioned. The second argument denotes the disk/memory configuration. Finally, CACHE_SIZE, which is a number between 0 and 100, determines the amount of allowed cache in the execution.
+
+By providing the above arguments, the program reads the config.txt file and sets up a dataset according to the configurations mentioned in the file. Then, it executes some searches based on the settings mentioned in the file and runs a single update operation (for all schemes except L-SDd[NlogN], L-SDd[3N], L-SDd[6N], only when the cache size is 0) and measures their execution time.
+
+All parameters used in the paper can be set using the above arguments and the settings provided in the config file. However, to change the block size, you need to modify the AES_KEY_SIZE in the types.hpp file and recompile the code.
 
 ### Configuration File ###
-The configuration file consist of few lines as follows and the application uses this information to randomly generate a dataset accordingly:
-N
-K
-num_of_queries
-q1
-q2
-.
-.
-.
-qn
+The configuration file consists of a few lines following a specific structure, and the application uses this information to randomly generate a dataset accordingly
 
-N shows the total number of dataset size (number of key-value pairs in PiBAS).
-K shows the total number of distinct keywords in the dataset
-num_of_queries shows how many search queries the user wants to measure and q1 to qn represent the result size of search query. For example consider the following example (which is the same as the paper's dataset with size = 2^23):
-
-8388606
-10000
-9
-1
-10
-100
-1000
-10000
-100000
-1000000
-2000000
-5000000
-
-It shows that we have a dataset with size 2^23 -2 and it contains 10K distinct keywords. Using this configuration we will be able to run 9 queries with result sizes equal to 1, 10, ..., 5M
-The following two configurations represent the real datasets used in Figure 15 of the paper. Note that you need to uncomment line 79 and comment line 80 of the main file.
-
-6123275
-10000
-6
-704368
-66666
-44471
-13546
-6257
-136
+    N  
+    K  
+    num_of_queries  
+    q1  
+    q2  
+    .  
+    .  
+    .  
+    qn  
+  
+N represents the total number of key-value pairs in the PiBAS dataset, indicating the dataset's size. K represents the total number of distinct keywords present in the dataset. num_of_queries indicates the number of search queries the user wants to measure, while q1 to qn represent the result sizes of those search queries. For example, consider the following dataset (which is the same as the dataset described in the paper) with a size of 2^23:
 
 
-6123275
-10000
-6
-615506
-63367
-22076
-5280
-1475
-217
+    8388606  
+    10000  
+    9  
+    1  
+    10  
+    100  
+    1000  
+    10000  
+    100000  
+    1000000  
+    2000000  
+    5000000  
+
+This configuration indicates that we have a dataset with a size of 2^23 -2 and it contains 10K distinct keywords. With this configuration, we will be able to run 9 queries with result sizes ranging from 1 to 5M, incrementing by 10.
+
+The following two configurations represent the real datasets used in Figure 15 of the paper. To replicate these datasets, you need to uncomment line 79 and comment line 80 of the main file.
+
+Column 5 of Crime Dataset:
+
+    6123275  
+    10000  
+    6  
+    704368  
+    66666  
+    44471  
+    13546  
+    6257  
+    136  
+  
+  
+Column 7 of Crime Dataset:
+
+    6123275  
+    10000  
+    6  
+    615506  
+    63367  
+    22076  
+    5280  
+    1475  
+    217  
 
 
 ### Contact ###
