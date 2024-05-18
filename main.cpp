@@ -21,38 +21,54 @@ using namespace std;
 int main(int argc, char** argv) {
     string schemeName = "";
     if (argc < 4) {
-        cout << "io-dse: missing arguments" << endl << endl;
-        cout << "Usage: dse SCHEME_NAME HARDWARE CACHE_SIZE" << endl << endl;
-        cout << "SCHEME_NAME:" << endl;
-        cout << "Amortized Schemes: SDa[PiBAS] / SDa[1C] / SDa[2C] / SDa[NlogN] / SDa[3N] / SDa[6N]" << endl;
-        cout << "DeAmortized Schemes: SDd[PiBAS] / L-SDd[1C] / L-SDd[NlogN] / L-SDd[3N] / L-SDd[6N]" << endl << endl;
-        cout << "HARDWARE: \t" << "HDD, SSD, Memory" << endl << endl;        
-        cout << "CACHE_SIZE (in percentage): \t" << "integer between 0 and 100" << endl << endl;
+        if (argc == 2 && string(argv[1]) == "test") {
+            system(("rm " + Utilities::rootAddress + " -rf").c_str());
+            system(("mkdir " + Utilities::rootAddress).c_str());
+            AmortizedPiBAS client(16, false, true);
+            cout << "Inserting File ID 1-6 into SDa[PiBAS]" << endl;
+            client.update(OP::INS, "test", 1, false);
+            client.update(OP::INS, "test", 2, false);
+            client.update(OP::INS, "test", 3, false);
+            client.update(OP::INS, "test", 4, false);
+            client.update(OP::INS, "test", 5, false);
+            client.update(OP::INS, "test", 6, false);
+            vector<int> res = client.search("test");
+            cout << "Number of Search Result:" << res.size() << endl;
+
+        } else {
+            cout << "io-dse: missing arguments" << endl << endl;
+            cout << "Usage: dse SCHEME_NAME HARDWARE CACHE_SIZE or dse test" << endl << endl;
+            cout << "SCHEME_NAME:" << endl;
+            cout << "Amortized Schemes: SDa[PiBAS] / SDa[1C] / SDa[2C] / SDa[NlogN] / SDa[3N] / SDa[6N]" << endl;
+            cout << "DeAmortized Schemes: SDd[PiBAS] / L-SDd[1C] / L-SDd[NlogN] / L-SDd[3N] / L-SDd[6N]" << endl << endl;
+            cout << "HARDWARE: \t" << "HDD, SSD, Memory" << endl << endl;
+            cout << "CACHE_SIZE (in percentage): \t" << "integer between 0 and 100" << endl << endl;
+        }
         return 0;
     }
     schemeName = argv[1];
-    string hardware = argv[2];    
+    string hardware = argv[2];
     int cacheSize = atoi(argv[3]);
-    
-    if(hardware=="HDD"){
+
+    if (hardware == "HDD") {
         Utilities::HDD_CACHE = true;
         Utilities::SSD_CACHE = false;
-        Utilities::KERNEL_CACHE = true;        
-    }else if (hardware=="SSD"){
+        Utilities::KERNEL_CACHE = true;
+    } else if (hardware == "SSD") {
         Utilities::HDD_CACHE = false;
         Utilities::SSD_CACHE = true;
-        Utilities::KERNEL_CACHE = true;        
-    }else if (hardware=="Memory"){
+        Utilities::KERNEL_CACHE = true;
+    } else if (hardware == "Memory") {
         Utilities::HDD_CACHE = false;
         Utilities::SSD_CACHE = false;
         Utilities::KERNEL_CACHE = false;
     }
-    
-    if(cacheSize>=0 and cacheSize <= 100){
-        Utilities::CACHE_PERCENTAGE = (double)cacheSize/100.0;
+
+    if (cacheSize >= 0 and cacheSize <= 100) {
+        Utilities::CACHE_PERCENTAGE = (double) cacheSize / 100.0;
     }
 
-//    schemeName = "SDa[PiBAS]";
+    //    schemeName = "SDa[PiBAS]";
 
     vector<TC<int> > testCases;
     uint keywordLength = 7;
@@ -131,11 +147,11 @@ int main(int argc, char** argv) {
     cout << "End of setting up initial key-value pairs" << endl;
 
     setup = false;
-    if(hardware=="HDD"){
+    if (hardware == "HDD") {
         Utilities::DROP_CACHE = true;
-    }else if (hardware=="SSD"){
+    } else if (hardware == "SSD") {
         Utilities::DROP_CACHE = true;
-    }else if (hardware=="Memory"){
+    } else if (hardware == "Memory") {
         Utilities::DROP_CACHE = false;
     }
     cout << "Start of the evaluation for a dataset with (N=" << testCases[0].N << ", K=" << testCases[0].K << ")" << endl;
@@ -158,7 +174,7 @@ int main(int argc, char** argv) {
         }
     }
 
-    if (schemeName != "L-SDd[NlogN]" && schemeName != "L-SDd[3N]" && schemeName != "L-SDd[6N]" && cacheSize==0) {
+    if (schemeName != "L-SDd[NlogN]" && schemeName != "L-SDd[3N]" && schemeName != "L-SDd[6N]" && cacheSize == 0) {
         Utilities::startTimer(500);
         scheme->update(OP::INS, "Test-KW-1", 101, false);
         time = Utilities::stopTimer(500);
