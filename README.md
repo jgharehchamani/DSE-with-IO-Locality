@@ -8,6 +8,9 @@ Priyanka Mondal, Javad Ghareh Chamani, Ioannis Demertzis, Dimitrios Papadopoulos
 Our schemes were tested with the following configuration
 - 64-bit Ubuntu 18.04
 - g++ = 5.5
+
+  use (sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 10) if needed
+- libssl-dev
 - nvme-cli (it is needed for SSD experiments)
 
 ### Getting Started ###
