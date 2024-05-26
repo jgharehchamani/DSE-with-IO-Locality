@@ -125,7 +125,6 @@
           <linkerLibItems>
             <linkerOptionItem>-lcrypto</linkerOptionItem>
             <linkerOptionItem>-lssl</linkerOptionItem>
-            <linkerLibLibItem>stxxl_debug</linkerLibLibItem>
           </linkerLibItems>
           <commandLine>-lpthread -lcrypto -lssl</commandLine>
         </linkerTool>

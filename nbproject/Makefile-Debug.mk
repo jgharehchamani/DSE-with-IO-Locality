@@ -88,7 +88,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lcrypto -lssl -lstxxl_debug
+LDLIBSOPTIONS=-lcrypto -lssl
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
